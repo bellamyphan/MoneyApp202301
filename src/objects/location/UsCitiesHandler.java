@@ -34,11 +34,9 @@ public class UsCitiesHandler {
     }
 
     public boolean isValidCity(String stateCode, String city) {
-        if (new UsStatesHandler().getStateCodes().contains(stateCode)) {
-            if (getCities(stateCode).contains(city)) {
+        if (new UsStatesHandler().isValidStateCode(stateCode))
+            if (getCities(stateCode).contains(city))
                 return true;
-            }
-        }
         return false;
     }
 }

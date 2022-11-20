@@ -10,9 +10,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BankDAO {
+    String dataFilePath = "data/banks.csv";
     List<BankObject> banks;
 
-    public BankDAO(String dataFilePath) {
+    public BankDAO() {
         // Create empty banks list.
         banks = new ArrayList<>();
         // Read the csv data file.
@@ -36,5 +37,14 @@ public class BankDAO {
 
     public List<BankObject> getBanks() {
         return banks;
+    }
+
+    public BankObject getBankObject(String bankName) {
+        for (BankObject bankObject : banks) {
+            if (bankObject.getName().compareTo(bankName) == 0) {
+                return bankObject;
+            }
+        }
+        return null;
     }
 }

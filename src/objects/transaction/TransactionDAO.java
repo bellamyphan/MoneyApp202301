@@ -1,6 +1,10 @@
 package objects.transaction;
 
 import objects.Type;
+import objects.bank.BankDAO;
+import objects.bank.BankObject;
+import objects.location.LocationObject;
+import objects.location.UsCitiesHandler;
 import tools.DateHandler;
 
 import java.io.File;
@@ -11,9 +15,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TransactionDAO {
+    String dataFilePath = "data/transactions.csv";
     List<Transaction> transactions;
 
-    public TransactionDAO(String dataFilePath) {
+    public TransactionDAO() {
         // Create empty transactions list.
         transactions = new ArrayList<>();
         // Read the csv data file.
@@ -31,11 +36,43 @@ public class TransactionDAO {
                 Type type = Type.valueOf(cells[4].toUpperCase());
                 String note = cells[5];
                 String name = cells[6];
-
-                System.out.println(currentLine);
+                LocationObject location = null;
+                if (isValidUSALocation(cells[7])) {
+                    location = new LocationObject("USA", getCity(cells[7]), getState(cells[7]));
+                }
+                BankObject primaryBank = new BankDAO().getBankObject(cells[8]);
+                BankObject secondaryBank = new BankDAO().getBankObject(cells[9]);
+                boolean isPending = Boolean.parseBoolean(cells[10]);
+                if (transactionType == TransactionType.NORMAL) {
+                    transactions.add(new TransactionObject(id, transactionType, date, amount, note, primaryBank,
+                            isPending, type, name, location, secondaryBank));
+                } else if (transactionType == TransactionType.FUTURE_SPLIT) {
+                    System.out.println("Need to implement Future Split transactions.");
+                }
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    private String getCity(String transactionLocation) {
+        String cells[] = transactionLocation.split("-");
+        return cells[0];
+    }
+
+    private String getState(String transactionLocation) {
+        String cells[] = transactionLocation.split("-");
+        return cells[1];
+    }
+
+    private boolean isValidUSALocation(String transactionLocation) {
+        if (new UsCitiesHandler().isValidCity(getState(transactionLocation), getCity(transactionLocation)))
+            return true;
+        else
+            return false;
     }
 }

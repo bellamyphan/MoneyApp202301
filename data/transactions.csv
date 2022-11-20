@@ -1,5 +1,5 @@
 ﻿Id,TransactionType,Date,Amount,Type,Note,Name,Location,PrimaryBank,SecondaryBank,IsPending
-1,Normal,2022-10-30,500,Income,Bi-weekly paycheck,Cognizant,NJ,Chase Checking,,No
-2,Normal,2022-11-12,300,Grocery,Milk and eggs,Costco,TX,Chase Checking,,No
-3,Normal,2022-11-15,500,Income,Bi-weekly paycheck,Cognizant,NJ,Chase Checking,,No
-4,Normal,2022-11-16,350,Grocery,Milk and eggs,Walmart,TX,Chase Freedom Unlimited,,No
+1,Normal,2022-10-30,500,Income,Bi-weekly paycheck,Cognizant,Dallas-TX,Chase Checking,,false
+2,Normal,2022-11-12,300,Grocery,Milk and eggs,Costco,Dallas-TX,Chase Checking,,false
+3,Normal,2022-11-15,500,Income,Bi-weekly paycheck,Cognizant,Dallas-TX,Chase Checking,,false
+4,Normal,2022-11-16,350,Grocery,Milk and eggs,Walmart,Dallas-TX,Chase Freedom Unlimited,,true

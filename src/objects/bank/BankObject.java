@@ -7,6 +7,7 @@ public class BankObject {
     Date openDate;
     Date closeDate;
     BankType type;
+    // Todo: add interest rate
 
     public BankObject(String name, Date openDate, Date closeDate, BankType type) {
         this.name = name;

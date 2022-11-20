@@ -40,4 +40,12 @@ public class UsStatesHandler {
     public List<String> getStateNames() {
         return stateNames;
     }
+
+    public boolean isValidStateCode(String stateCode) {
+        if (stateCodes.contains(stateCode)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

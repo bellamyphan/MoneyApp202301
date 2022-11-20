@@ -1,5 +1,6 @@
 package objects.transaction;
 
+import objects.Type;
 import tools.DateHandler;
 
 import java.io.File;
@@ -27,6 +28,10 @@ public class TransactionDAO {
                 TransactionType transactionType = TransactionType.valueOf(cells[1].toUpperCase());
                 Date date = new DateHandler(cells[2]).getDate();
                 double amount = Double.parseDouble(cells[3]);
+                Type type = Type.valueOf(cells[4].toUpperCase());
+                String note = cells[5];
+                String name = cells[6];
+
                 System.out.println(currentLine);
             }
         } catch (FileNotFoundException e) {

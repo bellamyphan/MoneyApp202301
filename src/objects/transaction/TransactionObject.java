@@ -2,10 +2,11 @@ package objects.transaction;
 
 import objects.*;
 import objects.bank.BankObject;
+import objects.Type;
 
 public class TransactionObject extends Transaction {
-    TypeObject type;
-    NameObject name;
+    Type type;
+    String name;
     LocationObject location;
     BankObject secondaryBank;
 }

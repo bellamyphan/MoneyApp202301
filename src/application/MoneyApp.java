@@ -1,14 +1,7 @@
 package application;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
-
 public class MoneyApp {
     public static void main(String[] args) {
-
-
-
+        System.out.println("Application is under development - Iteration 1 - 2022 11");
     }
 }

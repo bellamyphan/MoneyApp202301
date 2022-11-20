@@ -15,19 +15,13 @@ public class BankObject {
         this.type = type;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public Date getOpenDate() {
-        return openDate;
-    }
-
-    public Date getCloseDate() {
-        return closeDate;
-    }
-
-    public BankType getType() {
-        return type;
+    @Override
+    public String toString() {
+        return "BankObject{" +
+                "name='" + name + '\'' +
+                ", openDate=" + openDate +
+                ", closeDate=" + closeDate +
+                ", type=" + type +
+                '}';
     }
 }

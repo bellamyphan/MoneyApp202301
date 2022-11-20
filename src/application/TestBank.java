@@ -1,13 +1,13 @@
 package application;
 
 import objects.bank.BankObject;
-import objects.bank.BanksObject;
+import objects.bank.BankDAO;
 
 public class TestBank {
     public static void main(String[] args) {
-        BanksObject banksObject = new BanksObject("data/banks.csv");
-        for (BankObject bankObject : banksObject.getBanks()) {
-            System.out.println(bankObject.getName());
+        BankDAO bankDAO = new BankDAO("data/banks.csv");
+        for (BankObject bankObject : bankDAO.getBanks()) {
+            System.out.println(bankObject);
         }
     }
 }

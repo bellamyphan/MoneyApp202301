@@ -1,7 +1,7 @@
-package transactionObjects;
+package objects.transaction;
 
 import objects.AmountObject;
-import objects.BankObject;
+import objects.bank.BankObject;
 import objects.NoteObject;
 
 import java.util.Date;

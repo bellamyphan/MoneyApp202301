@@ -1,7 +1,4 @@
-package transactionObjects;
-
-import objects.AmountObject;
-import objects.BankObject;
+package objects.transaction;
 
 import java.util.List;
 

@@ -1,8 +1,7 @@
-package transactionObjects;
+package objects.transaction;
 
 import objects.*;
-
-import java.util.Date;
+import objects.bank.BankObject;
 
 public class TransactionObject extends Transaction {
     TypeObject type;

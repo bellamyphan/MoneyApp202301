@@ -1,5 +1,7 @@
 package objects.location;
 
+import tools.DoubleQuoteHandler;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -20,8 +22,8 @@ public class UsCitiesHandler {
             while (scanner.hasNext()) {
                 String currentLine = scanner.nextLine();
                 String cells[] = currentLine.split(",");
-                if (cells[2].equals(stateCode)) {
-                    cities.add(cells[1]);
+                if (DoubleQuoteHandler.removeDoubleQuote(cells[2]).equals(stateCode)) {
+                    cities.add(DoubleQuoteHandler.removeDoubleQuote(cells[1]));
                 }
             }
         } catch (FileNotFoundException e) {

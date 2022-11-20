@@ -1,3 +1,5 @@
-﻿Id,Date,Amount,Type,Note,Name,Location,PrimaryBank,SecondaryBank,isPending
-1,30-Oct,500,Income,Bi-weekly paycheck,Cognizant,NJ,Chase Checking,,No
-2,12-Nov,300,Grocery,Milk and eggs,Costco,TX,Chase Checking,,No
+﻿Id,Date,Amount,Type,Note,Name,Location,PrimaryBank,SecondaryBank,IsPending
+1,2022-10-30,500,Income,Bi-weekly paycheck,Cognizant,NJ,Chase Checking,,No
+2,2022-11-12,300,Grocery,Milk and eggs,Costco,TX,Chase Checking,,No
+3,2022-11-15,500,Income,Bi-weekly paycheck,Cognizant,NJ,Chase Checking,,No
+4,2022-11-16,350,Grocery,Milk and eggs,Walmart,TX,Chase Freedom Unlimited,,No

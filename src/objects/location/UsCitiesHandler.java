@@ -32,4 +32,13 @@ public class UsCitiesHandler {
         // Return the cities list.
         return cities;
     }
+
+    public boolean isValidCity(String stateCode, String city) {
+        if (new UsStatesHandler().getStateCodes().contains(stateCode)) {
+            if (getCities(stateCode).contains(city)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

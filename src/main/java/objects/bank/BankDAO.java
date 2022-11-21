@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BankDAO {
-    String dataFilePath = "data/banks.csv";
+    String dataFilePath = "data/phase1/banks.csv";
     List<BankObject> banks;
 
     public BankDAO() {

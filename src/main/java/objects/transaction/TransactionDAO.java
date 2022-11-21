@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TransactionDAO {
-    String dataFilePath = "data/transactions.csv";
+    String dataFilePath = "data/phase1/transactions.csv";
     List<Transaction> transactions;
 
     public TransactionDAO() {

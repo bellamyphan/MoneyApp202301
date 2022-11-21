@@ -1,8 +1,8 @@
 package objects.transaction;
 
+import objects.Type;
 import objects.amount.AmountObject;
 import objects.bank.BankObject;
-import objects.Type;
 import objects.location.LocationObject;
 
 import java.util.Date;

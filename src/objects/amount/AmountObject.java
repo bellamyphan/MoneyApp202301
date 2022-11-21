@@ -1,28 +1,42 @@
 package objects.amount;
 
 import java.math.BigDecimal;
-import java.util.Currency;
+import java.text.NumberFormat;
 import java.util.Locale;
 
 public class AmountObject {
-    Currency currency;
+    Locale locale;
     BigDecimal amount;
 
     public AmountObject(BigDecimal amount) {
-        currency = Currency.getInstance(Locale.US);
+        locale = Locale.US;
         this.amount = amount;
     }
 
-    public AmountObject(Currency currency, BigDecimal amount) {
-        this.currency = currency;
+    public AmountObject(Locale locale, BigDecimal amount) {
+        this.locale = locale;
         this.amount = amount;
     }
 
-    public Currency getCurrency() {
-        return currency;
+    public Locale getLocale() {
+        return locale;
     }
 
     public BigDecimal getAmount() {
         return amount;
+    }
+
+    @Override
+    public String toString() {
+        return NumberFormat.getCurrencyInstance(locale).format(amount);
+    }
+
+    public AmountObject add(AmountObject otherObject) {
+        if (locale.equals(otherObject.getLocale())) {
+            return new AmountObject(locale, amount.add(otherObject.getAmount()));
+        } else {
+            // todo: how to convert between currencies?
+            return null;
+        }
     }
 }

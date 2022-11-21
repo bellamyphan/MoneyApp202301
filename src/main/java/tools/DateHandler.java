@@ -32,8 +32,6 @@ public class DateHandler {
 
     @Override
     public String toString() {
-        return "DateHandler{" +
-                "dateString='" + dateString + '\'' +
-                '}';
+        return dateString;
     }
 }

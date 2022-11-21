@@ -7,7 +7,6 @@ import objects.transaction.Transaction;
 import objects.transaction.TransactionDAO;
 
 public class FullSuiteTest {
-
     public static void main(String[] args) {
         // Read all banks.
         BankDAO bankDAO = new BankDAO();

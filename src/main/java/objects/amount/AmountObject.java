@@ -1,4 +1,4 @@
-package main.java.objects.amount;
+package objects.amount;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;

@@ -1,10 +1,10 @@
-package main.java.application;
+package application;
 
-import main.java.objects.bank.BankBalanceHandler;
-import main.java.objects.bank.BankDAO;
-import main.java.objects.bank.BankObject;
-import main.java.objects.transaction.Transaction;
-import main.java.objects.transaction.TransactionDAO;
+import objects.bank.BankBalanceHandler;
+import objects.bank.BankDAO;
+import objects.bank.BankObject;
+import objects.transaction.Transaction;
+import objects.transaction.TransactionDAO;
 
 public class FullSuiteTest {
 

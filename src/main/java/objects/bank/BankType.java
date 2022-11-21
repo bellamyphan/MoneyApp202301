@@ -1,4 +1,4 @@
-package main.java.objects.bank;
+package objects.bank;
 
 public enum BankType {
     CHECKING,

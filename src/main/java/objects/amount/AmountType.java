@@ -1,4 +1,4 @@
-package main.java.objects.amount;
+package objects.amount;
 
 // todo: may delete this class.
 public enum AmountType {

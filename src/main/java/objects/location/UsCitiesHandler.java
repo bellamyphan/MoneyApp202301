@@ -1,6 +1,6 @@
-package main.java.objects.location;
+package objects.location;
 
-import main.java.tools.DoubleQuoteHandler;
+import tools.DoubleQuoteHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;

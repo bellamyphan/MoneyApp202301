@@ -1,4 +1,4 @@
-package main.java.objects.transaction;
+package objects.transaction;
 
 public enum TransactionType {
     NORMAL,

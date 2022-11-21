@@ -1,4 +1,4 @@
-package main.java.objects.location;
+package objects.location;
 
 public class LocationObject {
     String country;

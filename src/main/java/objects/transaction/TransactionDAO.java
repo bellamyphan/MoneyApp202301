@@ -1,12 +1,12 @@
-package main.java.objects.transaction;
+package objects.transaction;
 
-import main.java.objects.Type;
-import main.java.objects.amount.AmountObject;
-import main.java.objects.bank.BankDAO;
-import main.java.objects.bank.BankObject;
-import main.java.objects.location.LocationObject;
-import main.java.objects.location.UsCitiesHandler;
-import main.java.tools.DateHandler;
+import objects.Type;
+import objects.amount.AmountObject;
+import objects.bank.BankDAO;
+import objects.bank.BankObject;
+import objects.location.LocationObject;
+import objects.location.UsCitiesHandler;
+import tools.DateHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;

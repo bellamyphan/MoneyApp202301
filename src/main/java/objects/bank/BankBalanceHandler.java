@@ -1,8 +1,8 @@
-package main.java.objects.bank;
+package objects.bank;
 
-import main.java.objects.amount.AmountObject;
-import main.java.objects.transaction.Transaction;
-import main.java.objects.transaction.TransactionDAO;
+import objects.amount.AmountObject;
+import objects.transaction.Transaction;
+import objects.transaction.TransactionDAO;
 
 import java.math.BigDecimal;
 import java.util.Date;

@@ -1,6 +1,6 @@
-package main.java.objects.bank;
+package objects.bank;
 
-import main.java.tools.DateHandler;
+import tools.DateHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -29,4 +29,8 @@ public class BankObject {
                 ", type=" + type +
                 '}';
     }
+
+    public String toSimpleString() {
+        return "name='" + name + "', type=" + type;
+    }
 }

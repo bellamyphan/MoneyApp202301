@@ -1,5 +1,6 @@
 package objects.transaction;
 
+import objects.amount.AmountObject;
 import objects.bank.BankObject;
 
 import java.util.Date;
@@ -8,12 +9,12 @@ public abstract class Transaction {
     int id;
     TransactionType transactionType;
     Date date;
-    double amount;
+    AmountObject amount;
     String note;
     BankObject primaryBank;
     boolean isPending;
 
-    public Transaction(int id, TransactionType transactionType, Date date, double amount,
+    public Transaction(int id, TransactionType transactionType, Date date, AmountObject amount,
                        String note, BankObject primaryBank, boolean isPending) {
         this.id = id;
         this.transactionType = transactionType;
@@ -22,5 +23,17 @@ public abstract class Transaction {
         this.note = note;
         this.primaryBank = primaryBank;
         this.isPending = isPending;
+    }
+
+    public AmountObject getAmount() {
+        return amount;
+    }
+
+    public BankObject getPrimaryBank() {
+        return primaryBank;
+    }
+
+    public boolean hasPrimaryBank() {
+        return primaryBank != null;
     }
 }

@@ -25,12 +25,20 @@ public abstract class Transaction {
         this.isPending = isPending;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
     public AmountObject getAmount() {
         return amount;
     }
 
     public BankObject getPrimaryBank() {
         return primaryBank;
+    }
+
+    public boolean isPending() {
+        return isPending;
     }
 
     public boolean hasPrimaryBank() {

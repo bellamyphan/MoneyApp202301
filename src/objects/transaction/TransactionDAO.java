@@ -1,6 +1,7 @@
 package objects.transaction;
 
 import objects.Type;
+import objects.amount.AmountObject;
 import objects.bank.BankDAO;
 import objects.bank.BankObject;
 import objects.location.LocationObject;
@@ -9,6 +10,7 @@ import tools.DateHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +34,7 @@ public class TransactionDAO {
                 int id = Integer.parseInt(cells[0]);
                 TransactionType transactionType = TransactionType.valueOf(cells[1].toUpperCase());
                 Date date = new DateHandler(cells[2]).getDate();
-                double amount = Double.parseDouble(cells[3]);
+                AmountObject amount = new AmountObject(new BigDecimal(cells[3]));
                 Type type = Type.valueOf(cells[4].toUpperCase());
                 String note = cells[5];
                 String name = cells[6];

@@ -1,5 +1,6 @@
 package objects.transaction;
 
+import objects.amount.AmountObject;
 import objects.bank.BankObject;
 import objects.Type;
 import objects.location.LocationObject;
@@ -12,7 +13,7 @@ public class TransactionObject extends Transaction {
     LocationObject location;
     BankObject secondaryBank;
 
-    public TransactionObject(int id, TransactionType transactionType, Date date, double amount, String note,
+    public TransactionObject(int id, TransactionType transactionType, Date date, AmountObject amount, String note,
                              BankObject primaryBank, boolean isPending, Type type, String name,
                              LocationObject location, BankObject secondaryBank) {
         super(id, transactionType, date, amount, note, primaryBank, isPending);

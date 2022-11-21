@@ -1,6 +1,6 @@
-package objects;
+package objects.amount;
 
-// May delete this enum later.
+// todo: may delete this class.
 public enum AmountType {
     EXPENSE,
     INCOME,

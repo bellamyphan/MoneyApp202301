@@ -11,6 +11,11 @@ public class DateHandler {
         this.dateString = dateString;
     }
 
+    public DateHandler(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateString = simpleDateFormat.format(date);
+    }
+
     public Date getDate() {
         // If we have an empty date string.
         if (dateString.length() == 0) {
@@ -23,5 +28,12 @@ public class DateHandler {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "DateHandler{" +
+                "dateString='" + dateString + '\'' +
+                '}';
     }
 }

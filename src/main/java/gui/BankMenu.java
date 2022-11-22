@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import objects.bank.BankBalanceHandler;
 import objects.bank.BankDAO;

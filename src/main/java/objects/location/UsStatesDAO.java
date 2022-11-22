@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UsStatesDAO {
-    String dataFilePath = "data/usaStatesCities/usStates.csv";
+    final String dataFilePath = "data/usaStatesCities/usStates.csv";
     List<String> stateCodes;
     List<String> stateNames;
 
@@ -31,14 +31,6 @@ public class UsStatesDAO {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public List<String> getStateCodes() {
-        return stateCodes;
-    }
-
-    public List<String> getStateNames() {
-        return stateNames;
     }
 
     public boolean isValidStateCode(String stateCode) {

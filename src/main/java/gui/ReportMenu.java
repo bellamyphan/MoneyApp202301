@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 public class ReportMenu extends BasicMenu {
     // Type report for this month.

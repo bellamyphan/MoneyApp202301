@@ -1,7 +1,7 @@
 package application;
 
-import GUI.GUISupport;
-import GUI.MainMenu;
+import gui.GUISupport;
+import gui.MainMenu;
 
 public class MoneyApp {
     public final static String applicationName = "MoneyAppV1_202211";

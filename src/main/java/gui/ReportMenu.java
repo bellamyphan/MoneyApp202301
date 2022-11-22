@@ -4,16 +4,10 @@ public class ReportMenu extends BasicMenu {
     // Type report for this month.
     // Type report for last month.
     // Type report for the last 3 months (not including this month) on average
+    // Type report for x months (start month - end months)
+    // Type report for all (excluding future transactions)
 
     // Name and location report, work the same way just like type.
-
-    // Calculate my net worth as of today.
-    // Calculate my net worth as of a date in the past.
-    // Statistic my network in the last 12 months.
-    // Statistic my network in the last 5 years.
-    // Statistic my network in the last 10 years.
-    // Statistic my network in the last 20 years.
-    // Statistic my network in the last x years.
 
     // Budget should be dynamic or static for each month? => Budget should be available for the current month only?
     // Use budget to find abnormal transactions in the current month.

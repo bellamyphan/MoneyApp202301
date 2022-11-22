@@ -1,7 +1,8 @@
 package gui;
 
 import objects.transaction.Transaction;
-import objects.transaction.TransactionDAO;
+import objects.transaction.TransactionReaderDAO;
+import objects.transaction.TransactionGenerator;
 
 import java.util.List;
 
@@ -43,9 +44,13 @@ public class TransactionMenu extends BasicMenu {
             System.out.println(guiSupport.longDashLine());
     }
 
+    private void addATransaction() {
+        Transaction transaction = new TransactionGenerator().createNewTransaction();
+    }
+
     private void showAllTransactions() {
-        TransactionDAO transactionDAO = new TransactionDAO();
-        List<Transaction> transactions = transactionDAO.getTransactions();
+        TransactionReaderDAO transactionReaderDAO = new TransactionReaderDAO();
+        List<Transaction> transactions = transactionReaderDAO.getTransactions();
         for (Transaction transaction : transactions) {
             System.out.println(transaction);
         }

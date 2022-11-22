@@ -1,7 +1,7 @@
 package objects.name;
 
 import objects.transaction.Transaction;
-import objects.transaction.TransactionDAO;
+import objects.transaction.TransactionReaderDAO;
 import objects.transaction.TransactionObject;
 import objects.type.Type;
 
@@ -13,7 +13,7 @@ public class NameHandler {
     List<String> suggestedNames;
 
     public NameHandler(Type type, String note) {
-        List<Transaction> typedNotedTransactions = new TransactionDAO().getTransactions(type, note);
+        List<Transaction> typedNotedTransactions = new TransactionReaderDAO().getTransactions(type, note);
         suggestedNames = new ArrayList<>();
         for (Transaction transaction : typedNotedTransactions) {
             if (transaction instanceof TransactionObject) {
@@ -27,15 +27,18 @@ public class NameHandler {
     public String selectName() {
         String finalName;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Select a name:");
-        int i;
-        for (i = 0; i < suggestedNames.size(); i++) {
-            System.out.println(i + ". " + suggestedNames.get(i));
+        int option = 0;
+        if (suggestedNames.size() > 0) {
+            System.out.println("Select a name:");
+            int i;
+            for (i = 0; i < suggestedNames.size(); i++) {
+                System.out.println(i + ". " + suggestedNames.get(i));
+            }
+            System.out.println(i + ". ENTER YOUR NEW NAME");
+            System.out.print("Your selection: ");
+            option = scanner.nextInt();
+            scanner.nextLine();
         }
-        System.out.println(i + ". ENTER YOUR NEW NAME");
-        System.out.print("Your selection: ");
-        int option = scanner.nextInt();
-        scanner.nextLine();
         if (option < suggestedNames.size()) {
             finalName = suggestedNames.get(option);
             System.out.println("Confirm name: " + finalName);

@@ -1,11 +1,12 @@
 package objects.transaction;
 
+import application.MoneyApp;
 import objects.type.Type;
 import objects.amount.AmountObject;
-import objects.bank.BankDAO;
+import objects.bank.BankReaderDAO;
 import objects.bank.BankObject;
 import objects.location.LocationObject;
-import objects.location.UsCitiesDAO;
+import objects.location.UsCitiesReaderDAO;
 import tools.DateHandler;
 
 import java.io.File;
@@ -13,15 +14,14 @@ import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.util.*;
 
-public class TransactionDAO {
-    String dataFilePath = "data/production/transactions.csv";
+public class TransactionReaderDAO {
     List<Transaction> transactions;
 
-    public TransactionDAO() {
+    public TransactionReaderDAO() {
         // Create empty transactions list.
         transactions = new ArrayList<>();
         // Read the csv data file.
-        try (Scanner scanner = new Scanner(new File(dataFilePath))) {
+        try (Scanner scanner = new Scanner(new File(MoneyApp.transactionsDataPath))) {
             // Skip header line.
             scanner.nextLine();
             // Read each line.
@@ -39,8 +39,8 @@ public class TransactionDAO {
                 if (isValidUSALocation(cells[7])) {
                     location = new LocationObject("US", getState(cells[7]), getCity(cells[7]));
                 }
-                BankObject primaryBank = new BankDAO().getBankObject(cells[8]);
-                BankObject secondaryBank = new BankDAO().getBankObject(cells[9]);
+                BankObject primaryBank = new BankReaderDAO().getBankObject(cells[8]);
+                BankObject secondaryBank = new BankReaderDAO().getBankObject(cells[9]);
                 boolean isPending = Boolean.parseBoolean(cells[10]);
                 if (transactionType == TransactionType.NORMAL) {
                     transactions.add(new TransactionObject(id, transactionType, date, amount, note, primaryBank,
@@ -82,7 +82,11 @@ public class TransactionDAO {
     }
 
     public int getAutomatedTransactionId() {
-        return transactions.get(transactions.size()-1).getId() + 1;
+        if (transactions.size() == 0) {
+            return 0;
+        } else {
+            return transactions.get(transactions.size()-1).getId() + 1;
+        }
     }
 
     private String getCity(String transactionLocation) {
@@ -96,6 +100,6 @@ public class TransactionDAO {
     }
 
     private boolean isValidUSALocation(String transactionLocation) {
-        return new UsCitiesDAO().isValidCity(getState(transactionLocation), getCity(transactionLocation));
+        return new UsCitiesReaderDAO().isValidCity(getState(transactionLocation), getCity(transactionLocation));
     }
 }

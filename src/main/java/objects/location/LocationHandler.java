@@ -7,8 +7,8 @@ public class LocationHandler {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Location city-stateCode: ");
         String cityStateString = scanner.nextLine();
-        boolean isValidStateCode = new UsStatesDAO().isValidStateCode(getStateCode(cityStateString));
-        boolean isValidCityName = new UsCitiesDAO().isValidCity(
+        boolean isValidStateCode = new UsStatesReaderDAO().isValidStateCode(getStateCode(cityStateString));
+        boolean isValidCityName = new UsCitiesReaderDAO().isValidCity(
                 getStateCode(cityStateString), getCity(cityStateString));
         System.out.println("Valid state code: " + isValidStateCode);
         System.out.println("Valid city name: " + isValidCityName);

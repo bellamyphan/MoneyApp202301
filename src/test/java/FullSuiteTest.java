@@ -1,8 +1,8 @@
 import objects.bank.BankBalanceHandler;
-import objects.bank.BankDAO;
+import objects.bank.BankReaderDAO;
 import objects.bank.BankObject;
 import objects.transaction.Transaction;
-import objects.transaction.TransactionDAO;
+import objects.transaction.TransactionReaderDAO;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -12,34 +12,34 @@ import java.util.List;
 public class FullSuiteTest {
     @Test
     public void readAllBanks() {
-        BankDAO bankDAO = new BankDAO();
-        for (BankObject bankObject : bankDAO.getBanks()) {
+        BankReaderDAO bankReaderDAO = new BankReaderDAO();
+        for (BankObject bankObject : bankReaderDAO.getBanks()) {
             System.out.println(bankObject);
         }
-        assert bankDAO.getBanks().size() == 2;
+        assert bankReaderDAO.getBanks().size() == 2;
     }
 
     @Test
     public void readALlTransactions() {
-        TransactionDAO transactionDAO = new TransactionDAO();
-        for (Transaction transaction : transactionDAO.getTransactions()) {
+        TransactionReaderDAO transactionReaderDAO = new TransactionReaderDAO();
+        for (Transaction transaction : transactionReaderDAO.getTransactions()) {
             System.out.println(transaction);
         }
-        assert transactionDAO.getTransactions().size() == 6;
+        assert transactionReaderDAO.getTransactions().size() == 6;
     }
 
     @Test
     public void checkEachBankBalance() {
-        BankDAO bankDAO = new BankDAO();
+        BankReaderDAO bankReaderDAO = new BankReaderDAO();
         List<BigDecimal> results = new ArrayList<>();
         results.add(new BigDecimal("700"));
         results.add(new BigDecimal("-210.45"));
-        for (BankObject bankObject : bankDAO.getBanks()) {
+        for (BankObject bankObject : bankReaderDAO.getBanks()) {
             System.out.println("Balance of " + bankObject.getName() + ": " + new BankBalanceHandler()
                     .getBalance(bankObject));
         }
-        for (int i = 0; i < bankDAO.getBanks().size(); i++) {
-            assert new BankBalanceHandler().getBalance(bankDAO.getBanks().get(i)).getAmount()
+        for (int i = 0; i < bankReaderDAO.getBanks().size(); i++) {
+            assert new BankBalanceHandler().getBalance(bankReaderDAO.getBanks().get(i)).getAmount()
                     .compareTo(results.get(i)) == 0;
         }
     }

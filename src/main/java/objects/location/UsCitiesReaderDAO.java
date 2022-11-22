@@ -1,5 +1,6 @@
 package objects.location;
 
+import application.MoneyApp;
 import tools.DoubleQuoteHandler;
 
 import java.io.File;
@@ -8,14 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class UsCitiesDAO {
-    String dataFilePath = "data/usaStatesCities/usCities.csv";
-
+public class UsCitiesReaderDAO {
     public List<String> getCities(String stateCode) {
         // Create an empty list.
         List<String> cities = new ArrayList<>();
         // Read data file.
-        try (Scanner scanner = new Scanner(new File(dataFilePath))) {
+        try (Scanner scanner = new Scanner(new File(MoneyApp.usCitiesDataPath))) {
             // Skip header line.
             scanner.nextLine();
             // Read each line.
@@ -34,7 +33,7 @@ public class UsCitiesDAO {
     }
 
     public boolean isValidCity(String stateCode, String city) {
-        if (new UsStatesDAO().isValidStateCode(stateCode))
+        if (new UsStatesReaderDAO().isValidStateCode(stateCode))
             return getCities(stateCode).contains(city);
         return false;
     }

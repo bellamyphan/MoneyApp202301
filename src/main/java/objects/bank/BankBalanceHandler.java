@@ -2,7 +2,7 @@ package objects.bank;
 
 import objects.amount.AmountObject;
 import objects.transaction.Transaction;
-import objects.transaction.TransactionDAO;
+import objects.transaction.TransactionReaderDAO;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class BankBalanceHandler {
     public AmountObject getBalance(BankObject bank) {
-        List<Transaction> transactions = new TransactionDAO().getTransactions();
+        List<Transaction> transactions = new TransactionReaderDAO().getTransactions();
         AmountObject balance = new AmountObject(new BigDecimal("0"));
         for (Transaction transaction : transactions) {
             // Ignore pending transactions.

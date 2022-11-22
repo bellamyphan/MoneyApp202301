@@ -1,7 +1,7 @@
 package gui;
 
 import objects.bank.BankBalanceHandler;
-import objects.bank.BankDAO;
+import objects.bank.BankReaderDAO;
 import objects.bank.BankObject;
 
 public class BankMenu extends BasicMenu {
@@ -30,15 +30,15 @@ public class BankMenu extends BasicMenu {
     }
 
     private void showAllBanks() {
-        BankDAO bankDAO = new BankDAO();
-        for (BankObject bank : bankDAO.getBanks()) {
+        BankReaderDAO bankReaderDAO = new BankReaderDAO();
+        for (BankObject bank : bankReaderDAO.getBanks()) {
             System.out.println(bank);
         }
     }
 
     private void showAllBankBalances() {
-        BankDAO bankDAO = new BankDAO();
-        for (BankObject bankObject : bankDAO.getBanks()) {
+        BankReaderDAO bankReaderDAO = new BankReaderDAO();
+        for (BankObject bankObject : bankReaderDAO.getBanks()) {
             System.out.println("Balance of " + bankObject.getName() + ": " + new BankBalanceHandler()
                     .getBalance(bankObject));
         }

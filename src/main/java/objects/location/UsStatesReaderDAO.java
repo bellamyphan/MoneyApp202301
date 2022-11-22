@@ -1,5 +1,6 @@
 package objects.location;
 
+import application.MoneyApp;
 import tools.DoubleQuoteHandler;
 
 import java.io.File;
@@ -8,17 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class UsStatesDAO {
-    final String dataFilePath = "data/usaStatesCities/usStates.csv";
+public class UsStatesReaderDAO {
     List<String> stateCodes;
     List<String> stateNames;
 
-    public UsStatesDAO() {
+    public UsStatesReaderDAO() {
         // Create empty lists.
         stateCodes = new ArrayList<>();
         stateNames = new ArrayList<>();
         // Read data file.
-        try (Scanner scanner = new Scanner(new File(dataFilePath))) {
+        try (Scanner scanner = new Scanner(new File(MoneyApp.usStatesDataPath))) {
             // Ignore header line.
             scanner.nextLine();
             // Read each data line.

@@ -13,10 +13,10 @@ public class LocationObject {
 
     @Override
     public String toString() {
-        return "LocationObject{" +
-                "country='" + country + '\'' +
-                ", state='" + state + '\'' +
-                ", city='" + city + '\'' +
-                '}';
+        if (country.compareToIgnoreCase("us") == 0) {
+            return city + "-" + state;
+        } else {
+            return country + "-" + city + "-" + state;
+        }
     }
 }

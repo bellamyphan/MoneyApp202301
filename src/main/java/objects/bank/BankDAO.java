@@ -39,6 +39,16 @@ public class BankDAO {
         return banks;
     }
 
+    public List<BankObject> getActiveBanks() {
+        List<BankObject> activeBanks = new ArrayList<>();
+        for (BankObject bank : banks) {
+            if (bank.isActive()) {
+                activeBanks.add(bank);
+            }
+        }
+        return activeBanks;
+    }
+
     public BankObject getBankObject(String bankName) {
         for (BankObject bankObject : banks) {
             if (bankObject.getName().compareTo(bankName) == 0) {

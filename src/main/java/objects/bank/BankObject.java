@@ -20,17 +20,12 @@ public class BankObject {
         return name;
     }
 
-    @Override
-    public String toString() {
-        return "BankObject{" +
-                "name='" + name + '\'' +
-                ", openDate=" + openDate +
-                ", closeDate=" + closeDate +
-                ", type=" + type +
-                '}';
+    public boolean isActive() {
+        return closeDate == null;
     }
 
-    public String toSimpleString() {
-        return "name='" + name + "', type=" + type;
+    @Override
+    public String toString() {
+        return name;
     }
 }

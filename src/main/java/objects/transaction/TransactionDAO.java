@@ -1,20 +1,17 @@
 package objects.transaction;
 
-import objects.Type;
+import objects.type.Type;
 import objects.amount.AmountObject;
 import objects.bank.BankDAO;
 import objects.bank.BankObject;
 import objects.location.LocationObject;
-import objects.location.UsCitiesHandler;
+import objects.location.UsCitiesDAO;
 import tools.DateHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class TransactionDAO {
     String dataFilePath = "data/phase1/transactions.csv";
@@ -40,7 +37,7 @@ public class TransactionDAO {
                 String name = cells[6];
                 LocationObject location = null;
                 if (isValidUSALocation(cells[7])) {
-                    location = new LocationObject("USA", getCity(cells[7]), getState(cells[7]));
+                    location = new LocationObject("US", getState(cells[7]), getCity(cells[7]));
                 }
                 BankObject primaryBank = new BankDAO().getBankObject(cells[8]);
                 BankObject secondaryBank = new BankDAO().getBankObject(cells[9]);
@@ -61,20 +58,44 @@ public class TransactionDAO {
         return transactions;
     }
 
+    public List<Transaction> getTransactions(Type type) {
+        List<Transaction> typedTransactions = new ArrayList<>();
+        for (Transaction transaction : transactions) {
+            if (transaction instanceof TransactionObject) {
+                if (((TransactionObject) transaction).getType() == type) {
+                    typedTransactions.add(transaction);
+                }
+            }
+        }
+        return typedTransactions;
+    }
+
+    public List<Transaction> getTransactions(Type type, String note) {
+        List<Transaction> typedTransactions = getTransactions(type);
+        List<Transaction> typedNotedTransactions = new ArrayList<>();
+        for (Transaction transaction : typedTransactions) {
+            if (transaction.getNote().compareToIgnoreCase(note) == 0) {
+                typedNotedTransactions.add(transaction);
+            }
+        }
+        return typedNotedTransactions;
+    }
+
+    public int getAutomatedTransactionId() {
+        return transactions.get(transactions.size()-1).getId() + 1;
+    }
+
     private String getCity(String transactionLocation) {
-        String cells[] = transactionLocation.split("-");
+        String[] cells = transactionLocation.split("-");
         return cells[0];
     }
 
     private String getState(String transactionLocation) {
-        String cells[] = transactionLocation.split("-");
+        String[] cells = transactionLocation.split("-");
         return cells[1];
     }
 
     private boolean isValidUSALocation(String transactionLocation) {
-        if (new UsCitiesHandler().isValidCity(getState(transactionLocation), getCity(transactionLocation)))
-            return true;
-        else
-            return false;
+        return new UsCitiesDAO().isValidCity(getState(transactionLocation), getCity(transactionLocation));
     }
 }

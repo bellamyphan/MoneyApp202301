@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class WriteToCSVFile {
     public static void main(String[] args) {
-        try (FileWriter fileWriter = new FileWriter("data/production/banks2.csv");
+        try (FileWriter fileWriter = new FileWriter("data/production/banks2.csv", true);
              CSVWriter csvWriter = new CSVWriter(fileWriter)) {
             String[] strings = {"FirstColumn", "Second Column", "Third Column"};
             csvWriter.writeNext(strings);

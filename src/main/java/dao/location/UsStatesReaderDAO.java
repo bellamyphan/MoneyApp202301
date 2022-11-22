@@ -1,5 +1,6 @@
-package objects.location;
+package dao.location;
 
+import dao.path.DataPath;
 import tools.DoubleQuoteHandler;
 
 import java.io.File;
@@ -8,24 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class UsStatesDAO {
-    final String dataFilePath = "data/usaStatesCities/usStates.csv";
+public class UsStatesReaderDAO {
     List<String> stateCodes;
-    List<String> stateNames;
 
-    public UsStatesDAO() {
-        // Create empty lists.
+    public UsStatesReaderDAO() {
         stateCodes = new ArrayList<>();
-        stateNames = new ArrayList<>();
         // Read data file.
-        try (Scanner scanner = new Scanner(new File(dataFilePath))) {
+        try (Scanner scanner = new Scanner(new File(DataPath.usStatesDataPath))) {
             // Ignore header line.
             scanner.nextLine();
             // Read each data line.
             while (scanner.hasNext()) {
                 String currentLine = scanner.nextLine();
                 String[] cells = currentLine.split(",");
-                stateNames.add(DoubleQuoteHandler.removeDoubleQuote(cells[0]));
                 stateCodes.add(DoubleQuoteHandler.removeDoubleQuote(cells[2]));
             }
         } catch (FileNotFoundException e) {
@@ -33,7 +29,16 @@ public class UsStatesDAO {
         }
     }
 
+    public String getFormalStateCode(String stateCode) {
+        for (String formalStateCode : stateCodes) {
+            if (formalStateCode.compareToIgnoreCase(stateCode) == 0) {
+                return formalStateCode;
+            }
+        }
+        return null;
+    }
+
     public boolean isValidStateCode(String stateCode) {
-        return stateCodes.contains(stateCode);
+        return stateCodes.contains(stateCode.toUpperCase());
     }
 }

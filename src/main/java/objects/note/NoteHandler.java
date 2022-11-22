@@ -1,7 +1,7 @@
 package objects.note;
 
 import objects.transaction.Transaction;
-import objects.transaction.TransactionDAO;
+import dao.transaction.TransactionReaderDAO;
 import objects.type.Type;
 
 import java.util.LinkedList;
@@ -14,7 +14,7 @@ public class NoteHandler {
 
     public NoteHandler(Type type, String suggestionInput) {
         this.suggestionInput = suggestionInput;
-        List<Transaction> typedTransactions = new TransactionDAO().getTransactions(type);
+        List<Transaction> typedTransactions = new TransactionReaderDAO().getTransactions(type);
         suggestedNotes = new LinkedList<>();
         for (Transaction transaction : typedTransactions) {
             if (transaction.getNote().toLowerCase().contains(suggestionInput.toLowerCase())) {
@@ -28,15 +28,18 @@ public class NoteHandler {
     public String selectNote() {
         String finalNote;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Select a note:");
-        int i;
-        for (i = 0; i < suggestedNotes.size(); i++) {
-            System.out.println(i + ". " + suggestedNotes.get(i));
+        int option = 0;
+        if (suggestedNotes.size() > 0) {
+            System.out.println("Select a note:");
+            int i;
+            for (i = 0; i < suggestedNotes.size(); i++) {
+                System.out.println(i + ". " + suggestedNotes.get(i));
+            }
+            System.out.println(i + ". ENTER YOUR NEW NOTES");
+            System.out.print("Your selection: ");
+            option = scanner.nextInt();
+            scanner.nextLine();
         }
-        System.out.println(i + ". ENTER YOUR NEW NOTES");
-        System.out.print("Your selection: ");
-        int option = scanner.nextInt();
-        scanner.nextLine();
         if (option < suggestedNotes.size()) {
             finalNote = suggestedNotes.get(option);
             System.out.println("Confirm note: " + finalNote);

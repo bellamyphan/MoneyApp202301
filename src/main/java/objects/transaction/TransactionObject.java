@@ -32,6 +32,14 @@ public class TransactionObject extends Transaction {
         return name;
     }
 
+    public LocationObject getLocation() {
+        return location;
+    }
+
+    public BankObject getSecondaryBank() {
+        return secondaryBank;
+    }
+
     @Override
     public String toString() {
         return "id=" + id +
@@ -40,7 +48,7 @@ public class TransactionObject extends Transaction {
                 ", type=" + type +
                 ", note='" + note + '\'' +
                 ", name='" + name + '\'' +
-                ", location=" + location +
+                ", location='" + location + '\'' +
                 ", primaryBank=" + primaryBank +
                 ", secondaryBank=" + secondaryBank +
                 ", transactionType=" + transactionType +

@@ -1,7 +1,10 @@
 package gui;
 
+import dao.transaction.TransactionWriterDAO;
 import objects.transaction.Transaction;
-import objects.transaction.TransactionDAO;
+import dao.transaction.TransactionReaderDAO;
+import objects.transaction.TransactionGenerator;
+import objects.transaction.TransactionObject;
 
 import java.util.List;
 
@@ -36,6 +39,7 @@ public class TransactionMenu extends BasicMenu {
         System.out.println(guiSupport.shortDashLine());
         switch (option) {
             case 0 -> System.out.println("Exit Transaction Menu...");
+            case 1 -> addATransaction();
             case 10 -> showAllTransactions();
             default -> System.out.println("This feature is not IMPLEMENTED or INVALID input");
         }
@@ -43,9 +47,14 @@ public class TransactionMenu extends BasicMenu {
             System.out.println(guiSupport.longDashLine());
     }
 
+    private void addATransaction() {
+        TransactionObject transactionObject = new TransactionGenerator().createNewTransaction();
+        new TransactionWriterDAO().addATransactionToDatabase(transactionObject);
+    }
+
     private void showAllTransactions() {
-        TransactionDAO transactionDAO = new TransactionDAO();
-        List<Transaction> transactions = transactionDAO.getTransactions();
+        TransactionReaderDAO transactionReaderDAO = new TransactionReaderDAO();
+        List<Transaction> transactions = transactionReaderDAO.getTransactions();
         for (Transaction transaction : transactions) {
             System.out.println(transaction);
         }

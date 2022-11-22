@@ -5,26 +5,26 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateHandler {
-    String dateString;
+    String yyyyMMddString;
 
-    public DateHandler(String dateString) {
-        this.dateString = dateString;
+    public DateHandler(String yyyyMMddString) {
+        this.yyyyMMddString = yyyyMMddString;
     }
 
     public DateHandler(Date date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateString = simpleDateFormat.format(date);
+        yyyyMMddString = simpleDateFormat.format(date);
     }
 
     public Date getDate() {
         // If we have an empty date string.
-        if (dateString.length() == 0) {
+        if (yyyyMMddString.length() == 0) {
             return null;
         }
         // If we have a valid string date format.
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            return simpleDateFormat.parse(dateString);
+            return simpleDateFormat.parse(yyyyMMddString);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -32,6 +32,6 @@ public class DateHandler {
 
     @Override
     public String toString() {
-        return dateString;
+        return yyyyMMddString;
     }
 }

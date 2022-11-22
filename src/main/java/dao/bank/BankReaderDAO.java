@@ -1,5 +1,8 @@
-package objects.bank;
+package dao.bank;
 
+import dao.path.DataPath;
+import objects.bank.BankObject;
+import objects.bank.BankType;
 import tools.DateHandler;
 
 import java.io.File;
@@ -9,15 +12,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class BankDAO {
-    String dataFilePath = "data/production/banks.csv";
+public class BankReaderDAO {
     List<BankObject> banks;
 
-    public BankDAO() {
+    public BankReaderDAO() {
         // Create empty banks list.
         banks = new ArrayList<>();
         // Read the csv data file.
-        try (Scanner scanner = new Scanner(new File(dataFilePath))) {
+        try (Scanner scanner = new Scanner(new File(DataPath.banksDataPath))) {
             // Skip header line.
             scanner.nextLine();
             // Read each line.

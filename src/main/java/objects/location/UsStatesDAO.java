@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class UsStatesHandler {
+public class UsStatesDAO {
     String dataFilePath = "data/usaStatesCities/usStates.csv";
     List<String> stateCodes;
     List<String> stateNames;
 
-    public UsStatesHandler() {
+    public UsStatesDAO() {
         // Create empty lists.
         stateCodes = new ArrayList<>();
         stateNames = new ArrayList<>();
@@ -24,7 +24,7 @@ public class UsStatesHandler {
             // Read each data line.
             while (scanner.hasNext()) {
                 String currentLine = scanner.nextLine();
-                String cells[] = currentLine.split(",");
+                String[] cells = currentLine.split(",");
                 stateNames.add(DoubleQuoteHandler.removeDoubleQuote(cells[0]));
                 stateCodes.add(DoubleQuoteHandler.removeDoubleQuote(cells[2]));
             }
@@ -42,10 +42,6 @@ public class UsStatesHandler {
     }
 
     public boolean isValidStateCode(String stateCode) {
-        if (stateCodes.contains(stateCode)) {
-            return true;
-        } else {
-            return false;
-        }
+        return stateCodes.contains(stateCode);
     }
 }

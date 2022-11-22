@@ -14,7 +14,7 @@ public class FullSuiteTest {
     public void readAllBanks() {
         BankDAO bankDAO = new BankDAO();
         for (BankObject bankObject : bankDAO.getBanks()) {
-            System.out.println(bankObject.toSimpleString());
+            System.out.println(bankObject);
         }
         assert bankDAO.getBanks().size() == 2;
     }

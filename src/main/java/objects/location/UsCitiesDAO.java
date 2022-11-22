@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class UsCitiesHandler {
+public class UsCitiesDAO {
     String dataFilePath = "data/usaStatesCities/usCities.csv";
 
     public List<String> getCities(String stateCode) {
@@ -21,7 +21,7 @@ public class UsCitiesHandler {
             // Read each line.
             while (scanner.hasNext()) {
                 String currentLine = scanner.nextLine();
-                String cells[] = currentLine.split(",");
+                String[] cells = currentLine.split(",");
                 if (DoubleQuoteHandler.removeDoubleQuote(cells[2]).equals(stateCode)) {
                     cities.add(DoubleQuoteHandler.removeDoubleQuote(cells[1]));
                 }
@@ -34,9 +34,8 @@ public class UsCitiesHandler {
     }
 
     public boolean isValidCity(String stateCode, String city) {
-        if (new UsStatesHandler().isValidStateCode(stateCode))
-            if (getCities(stateCode).contains(city))
-                return true;
+        if (new UsStatesDAO().isValidStateCode(stateCode))
+            return getCities(stateCode).contains(city);
         return false;
     }
 }

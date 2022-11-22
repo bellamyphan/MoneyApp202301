@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BankDAO {
-    String dataFilePath = "data/phase1/banks.csv";
+    String dataFilePath = "data/production/banks.csv";
     List<BankObject> banks;
 
     public BankDAO() {
@@ -37,6 +37,16 @@ public class BankDAO {
 
     public List<BankObject> getBanks() {
         return banks;
+    }
+
+    public List<BankObject> getActiveBanks() {
+        List<BankObject> activeBanks = new ArrayList<>();
+        for (BankObject bank : banks) {
+            if (bank.isActive()) {
+                activeBanks.add(bank);
+            }
+        }
+        return activeBanks;
     }
 
     public BankObject getBankObject(String bankName) {

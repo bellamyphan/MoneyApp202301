@@ -1,9 +1,10 @@
 package objects.transaction;
 
-import objects.Type;
+import objects.type.Type;
 import objects.amount.AmountObject;
 import objects.bank.BankObject;
 import objects.location.LocationObject;
+import tools.DateHandler;
 
 import java.util.Date;
 
@@ -23,20 +24,26 @@ public class TransactionObject extends Transaction {
         this.secondaryBank = secondaryBank;
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
-        return "TransactionObject{" +
-                "type=" + type +
+        return "id=" + id +
+                ", date=" + new DateHandler(date) +
+                ", amount=" + amount +
+                ", type=" + type +
+                ", note='" + note + '\'' +
                 ", name='" + name + '\'' +
                 ", location=" + location +
-                ", secondaryBank=" + secondaryBank +
-                ", id=" + id +
-                ", transactionType=" + transactionType +
-                ", date=" + date +
-                ", amount=" + amount +
-                ", note='" + note + '\'' +
                 ", primaryBank=" + primaryBank +
-                ", isPending=" + isPending +
-                '}';
+                ", secondaryBank=" + secondaryBank +
+                ", transactionType=" + transactionType +
+                ", isPending=" + isPending;
     }
 }

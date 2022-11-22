@@ -1,6 +1,6 @@
 package objects.bank;
 
-import application.MoneyApp;
+import dao.DataPath;
 import tools.DateHandler;
 
 import java.io.File;
@@ -17,7 +17,7 @@ public class BankReaderDAO {
         // Create empty banks list.
         banks = new ArrayList<>();
         // Read the csv data file.
-        try (Scanner scanner = new Scanner(new File(MoneyApp.banksDataPath))) {
+        try (Scanner scanner = new Scanner(new File(DataPath.banksDataPath))) {
             // Skip header line.
             scanner.nextLine();
             // Read each line.

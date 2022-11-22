@@ -1,6 +1,6 @@
 package objects.transaction;
 
-import application.MoneyApp;
+import dao.DataPath;
 import objects.type.Type;
 import objects.amount.AmountObject;
 import objects.bank.BankReaderDAO;
@@ -21,7 +21,7 @@ public class TransactionReaderDAO {
         // Create empty transactions list.
         transactions = new ArrayList<>();
         // Read the csv data file.
-        try (Scanner scanner = new Scanner(new File(MoneyApp.transactionsDataPath))) {
+        try (Scanner scanner = new Scanner(new File(DataPath.transactionsDataPath))) {
             // Skip header line.
             scanner.nextLine();
             // Read each line.

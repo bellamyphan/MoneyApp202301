@@ -1,6 +1,6 @@
 package objects.location;
 
-import application.MoneyApp;
+import dao.DataPath;
 import tools.DoubleQuoteHandler;
 
 import java.io.File;
@@ -18,7 +18,7 @@ public class UsStatesReaderDAO {
         stateCodes = new ArrayList<>();
         stateNames = new ArrayList<>();
         // Read data file.
-        try (Scanner scanner = new Scanner(new File(MoneyApp.usStatesDataPath))) {
+        try (Scanner scanner = new Scanner(new File(DataPath.usStatesDataPath))) {
             // Ignore header line.
             scanner.nextLine();
             // Read each data line.

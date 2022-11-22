@@ -1,4 +1,4 @@
-package dao;
+package dao.path;
 
 public class DataPath {
     public final static String transactionsDataPath = "data/production/transactions.csv";

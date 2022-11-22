@@ -1,12 +1,15 @@
-package objects.transaction;
+package dao.transaction;
 
-import dao.DataPath;
+import dao.path.DataPath;
+import objects.transaction.Transaction;
+import objects.transaction.TransactionObject;
+import objects.transaction.TransactionType;
 import objects.type.Type;
 import objects.amount.AmountObject;
-import objects.bank.BankReaderDAO;
+import dao.bank.BankReaderDAO;
 import objects.bank.BankObject;
 import objects.location.LocationObject;
-import objects.location.UsCitiesReaderDAO;
+import dao.location.UsCitiesReaderDAO;
 import tools.DateHandler;
 
 import java.io.File;

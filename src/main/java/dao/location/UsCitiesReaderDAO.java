@@ -1,6 +1,6 @@
-package objects.location;
+package dao.location;
 
-import dao.DataPath;
+import dao.path.DataPath;
 import tools.DoubleQuoteHandler;
 
 import java.io.File;

@@ -1,4 +1,4 @@
-package objects.transaction;
+package dao.transaction;
 
 public class TransactionWriterDAO {
 }

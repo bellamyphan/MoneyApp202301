@@ -1,7 +1,7 @@
 package gui;
 
 import objects.bank.BankBalanceHandler;
-import objects.bank.BankReaderDAO;
+import dao.bank.BankReaderDAO;
 import objects.bank.BankObject;
 
 public class BankMenu extends BasicMenu {

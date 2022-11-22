@@ -1,7 +1,7 @@
 package objects.name;
 
 import objects.transaction.Transaction;
-import objects.transaction.TransactionReaderDAO;
+import dao.transaction.TransactionReaderDAO;
 import objects.transaction.TransactionObject;
 import objects.type.Type;
 

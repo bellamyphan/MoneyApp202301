@@ -1,5 +1,8 @@
 package objects.location;
 
+import dao.location.UsCitiesReaderDAO;
+import dao.location.UsStatesReaderDAO;
+
 import java.util.Scanner;
 
 public class LocationHandler {

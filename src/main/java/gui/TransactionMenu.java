@@ -1,7 +1,7 @@
 package gui;
 
 import objects.transaction.Transaction;
-import objects.transaction.TransactionReaderDAO;
+import dao.transaction.TransactionReaderDAO;
 import objects.transaction.TransactionGenerator;
 
 import java.util.List;

@@ -1,6 +1,8 @@
-package objects.bank;
+package dao.bank;
 
-import dao.DataPath;
+import dao.path.DataPath;
+import objects.bank.BankObject;
+import objects.bank.BankType;
 import tools.DateHandler;
 
 import java.io.File;

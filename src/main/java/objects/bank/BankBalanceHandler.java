@@ -2,7 +2,7 @@ package objects.bank;
 
 import objects.amount.AmountObject;
 import objects.transaction.Transaction;
-import objects.transaction.TransactionReaderDAO;
+import dao.transaction.TransactionReaderDAO;
 
 import java.math.BigDecimal;
 import java.util.Date;

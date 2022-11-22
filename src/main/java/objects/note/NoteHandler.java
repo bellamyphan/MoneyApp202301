@@ -1,7 +1,7 @@
 package objects.note;
 
 import objects.transaction.Transaction;
-import objects.transaction.TransactionReaderDAO;
+import dao.transaction.TransactionReaderDAO;
 import objects.type.Type;
 
 import java.util.LinkedList;

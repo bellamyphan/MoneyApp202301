@@ -1,5 +1,6 @@
 package objects.transaction;
 
+import dao.transaction.TransactionReaderDAO;
 import gui.GUISupport;
 import objects.amount.AmountObject;
 import objects.bank.BankHandler;

@@ -1,8 +1,8 @@
 import objects.bank.BankBalanceHandler;
-import objects.bank.BankReaderDAO;
+import dao.bank.BankReaderDAO;
 import objects.bank.BankObject;
 import objects.transaction.Transaction;
-import objects.transaction.TransactionReaderDAO;
+import dao.transaction.TransactionReaderDAO;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

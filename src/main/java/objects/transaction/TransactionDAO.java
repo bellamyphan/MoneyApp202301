@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class TransactionDAO {
-    String dataFilePath = "data/phase1/transactions.csv";
+    String dataFilePath = "data/production/transactions.csv";
     List<Transaction> transactions;
 
     public TransactionDAO() {

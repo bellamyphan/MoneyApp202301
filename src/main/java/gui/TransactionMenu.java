@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import objects.transaction.Transaction;
 import objects.transaction.TransactionDAO;

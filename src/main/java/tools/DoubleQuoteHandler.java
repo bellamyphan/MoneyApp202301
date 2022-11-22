@@ -10,10 +10,7 @@ public class DoubleQuoteHandler {
     }
 
     private static boolean hasDoubleQuote(String string) {
-        if (string.charAt(0) == 34) {
-            return true;
-        } else {
-            return false;
-        }
+        if (string.length() < 2) return false;
+        return string.charAt(0) == 34;
     }
 }

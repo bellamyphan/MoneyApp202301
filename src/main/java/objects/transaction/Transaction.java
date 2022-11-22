@@ -29,6 +29,10 @@ public abstract class Transaction {
         return id;
     }
 
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
     public Date getDate() {
         return date;
     }

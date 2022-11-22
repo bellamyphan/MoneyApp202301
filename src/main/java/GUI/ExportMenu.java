@@ -1,4 +1,4 @@
 package GUI;
 
-public class ExportMenu {
+public class ExportMenu extends BasicMenu {
 }

@@ -8,28 +8,31 @@ import java.util.Scanner;
 public class LocationHandler {
     public LocationObject getLocation() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Location city-stateCode: ");
+        UsStatesReaderDAO usStatesReaderDAO = new UsStatesReaderDAO();
+        System.out.print("Location (Enter 'cityName, stateCode'): ");
         String cityStateString = scanner.nextLine();
-        boolean isValidStateCode = new UsStatesReaderDAO().isValidStateCode(getStateCode(cityStateString));
-        boolean isValidCityName = new UsCitiesReaderDAO().isValidCity(
-                getStateCode(cityStateString), getCity(cityStateString));
+        String cityName = getCity(cityStateString);
+        String stateCode = getStateCode(cityStateString);
+        boolean isValidStateCode = usStatesReaderDAO.isValidStateCode(stateCode);
+        boolean isValidCityName = new UsCitiesReaderDAO(stateCode).isValidCity(cityName);
         System.out.println("Valid state code: " + isValidStateCode);
         System.out.println("Valid city name: " + isValidCityName);
         LocationObject location = null;
         if (isValidStateCode && isValidCityName) {
-            location = new LocationObject("US", getStateCode(cityStateString), getCity(cityStateString));
+            location = new LocationObject("US", usStatesReaderDAO.getFormalStateCode(stateCode),
+                    new UsCitiesReaderDAO(stateCode).getFormalCityName(cityName));
         }
         System.out.println("Confirm location: " + location);
         return location;
     }
 
     private String getStateCode(String cityStateString) {
-        String[] cells = cityStateString.split("-");
+        String[] cells = cityStateString.split(", ");
         return cells[1];
     }
 
     private String getCity(String cityStateString) {
-        String[] cells = cityStateString.split("-");
+        String[] cells = cityStateString.split(", ");
         return cells[0];
     }
 }

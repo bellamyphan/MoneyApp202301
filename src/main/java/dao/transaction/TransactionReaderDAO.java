@@ -103,6 +103,6 @@ public class TransactionReaderDAO {
     }
 
     private boolean isValidUSALocation(String transactionLocation) {
-        return new UsCitiesReaderDAO().isValidCity(getState(transactionLocation), getCity(transactionLocation));
+        return new UsCitiesReaderDAO(getState(transactionLocation)).isValidCity(getCity(transactionLocation));
     }
 }

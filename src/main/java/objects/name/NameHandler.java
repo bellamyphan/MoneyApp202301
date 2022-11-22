@@ -29,21 +29,21 @@ public class NameHandler {
         Scanner scanner = new Scanner(System.in);
         int option = 0;
         if (suggestedNames.size() > 0) {
-            System.out.println("Select a name:");
+            System.out.println("Select a name (Company/Brand):");
             int i;
             for (i = 0; i < suggestedNames.size(); i++) {
                 System.out.println(i + ". " + suggestedNames.get(i));
             }
-            System.out.println(i + ". ENTER YOUR NEW NAME");
+            System.out.println(i + ". ENTER YOUR NEW NAME (Company/Brand)");
             System.out.print("Your selection: ");
             option = scanner.nextInt();
             scanner.nextLine();
         }
         if (option < suggestedNames.size()) {
             finalName = suggestedNames.get(option);
-            System.out.println("Confirm name: " + finalName);
+            System.out.println("Confirm name (Company/Brand): " + finalName);
         } else {
-            System.out.print("Enter your new name: ");
+            System.out.print("Enter your new name (Company/Brand): ");
             finalName = scanner.nextLine();
         }
         return finalName;

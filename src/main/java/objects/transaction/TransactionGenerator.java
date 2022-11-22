@@ -9,6 +9,7 @@ import objects.location.LocationHandler;
 import objects.location.LocationObject;
 import objects.name.NameHandler;
 import objects.note.NoteHandler;
+import objects.pending.PendingHandler;
 import objects.type.Type;
 import objects.type.TypeHandler;
 import tools.DateHandler;
@@ -35,10 +36,10 @@ public class TransactionGenerator {
         Type type = new TypeHandler().selectType();
         System.out.println(guiSupport.shortDashLine());
         // Input date.
-        System.out.print("Date yyyy-mm-dd (leave blank for auto input): ");
+        System.out.print("Date yyyy-mm-dd (Leave it BLANK for today's date): ");
         String dateString = scanner.nextLine();
         Date date;
-        if (dateString == null || dateString.length() == 0) {
+        if (dateString == null || dateString.length() < 10) {
             date = new Date();
         } else {
             date = new DateHandler(dateString).getDate();
@@ -48,7 +49,7 @@ public class TransactionGenerator {
         // Get the amount.
         System.out.print("Enter amount (assumed USD): ");
         String amountString = scanner.nextLine();
-        AmountObject amount = new AmountObject(new BigDecimal(amountString));
+        AmountObject amount = new AmountObject(new BigDecimal(amountString.length() > 0 ? amountString : "0"));
         System.out.println("Confirm amount: " + amount);
         System.out.println(guiSupport.shortDashLine());
         // Get notes with suggestion.
@@ -68,9 +69,8 @@ public class TransactionGenerator {
         BankObject secondaryBank = new BankHandler().selectSecondaryBank(primaryBank);
         System.out.println(guiSupport.shortDashLine());
         // Is pending?
-        System.out.print("Pending (y/n)?: ");
-        String pendingString = scanner.nextLine();
-        boolean isPending = pendingString.compareToIgnoreCase("y") == 0;
+        boolean isPending = new PendingHandler().getIsPending();
+        System.out.println("Confirm isPending: " + isPending);
         System.out.println(guiSupport.shortDashLine());
         // Created a new transaction.
         TransactionObject newTransaction = new TransactionObject(automatedId, TransactionType.NORMAL, date, amount,
@@ -78,10 +78,11 @@ public class TransactionGenerator {
         // Confirm transaction is good.
         System.out.println("Created transaction");
         System.out.println(newTransaction);
-        System.out.println("Is it good (y/n)? ");
+        System.out.println("Save this (default NO, type 'yes' or 'y' or BLANK)? ");
         String finalConfirmation = scanner.nextLine();
         System.out.println(guiSupport.shortDashLine());
-        return finalConfirmation.compareToIgnoreCase("y") == 0 ? newTransaction : null;
+        return (finalConfirmation.compareToIgnoreCase("y") == 0 ||
+                finalConfirmation.compareToIgnoreCase("yes") == 0) ? newTransaction : null;
     }
 
 }

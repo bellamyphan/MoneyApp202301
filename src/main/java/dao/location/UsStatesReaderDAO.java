@@ -11,12 +11,9 @@ import java.util.Scanner;
 
 public class UsStatesReaderDAO {
     List<String> stateCodes;
-    List<String> stateNames;
 
     public UsStatesReaderDAO() {
-        // Create empty lists.
         stateCodes = new ArrayList<>();
-        stateNames = new ArrayList<>();
         // Read data file.
         try (Scanner scanner = new Scanner(new File(DataPath.usStatesDataPath))) {
             // Ignore header line.
@@ -25,7 +22,6 @@ public class UsStatesReaderDAO {
             while (scanner.hasNext()) {
                 String currentLine = scanner.nextLine();
                 String[] cells = currentLine.split(",");
-                stateNames.add(DoubleQuoteHandler.removeDoubleQuote(cells[0]));
                 stateCodes.add(DoubleQuoteHandler.removeDoubleQuote(cells[2]));
             }
         } catch (FileNotFoundException e) {
@@ -33,7 +29,16 @@ public class UsStatesReaderDAO {
         }
     }
 
+    public String getFormalStateCode(String stateCode) {
+        for (String formalStateCode : stateCodes) {
+            if (formalStateCode.compareToIgnoreCase(stateCode) == 0) {
+                return formalStateCode;
+            }
+        }
+        return null;
+    }
+
     public boolean isValidStateCode(String stateCode) {
-        return stateCodes.contains(stateCode);
+        return stateCodes.contains(stateCode.toUpperCase());
     }
 }

@@ -9,6 +9,7 @@ public class MainMenu extends BasicMenu {
         System.out.println("3. Report menu");
         System.out.println("4. Export menu");
         System.out.println("5. Investment and Saving menu");
+        System.out.println("6. Net Worth menu");
         System.out.println("0. Exit this menu");
         System.out.print("Select: ");
         option = scanner.nextInt();
@@ -21,6 +22,7 @@ public class MainMenu extends BasicMenu {
             case 3 -> new ReportMenu().run();
             case 4 -> new ExportMenu().run();
             case 5 -> new InvestmentAndSavingMenu().run();
+            case 6 -> new NetWorthMenu().run();
             default -> System.out.println("INVALID input");
         }
         System.out.println(guiSupport.longDashLine());

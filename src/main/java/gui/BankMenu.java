@@ -15,6 +15,10 @@ public class BankMenu extends BasicMenu {
         System.out.println("5. Modify a bank");
         System.out.println("6. Bank monthly/quarterly statement management");
         System.out.println("0. Exit this menu");
+
+        // Total cash I have for each category
+        // Checking, savings, brokers
+
         System.out.print("Select: ");
         option = scanner.nextInt();
         scanner.nextLine();

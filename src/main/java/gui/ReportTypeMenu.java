@@ -1,21 +1,21 @@
 package gui;
 
+import objects.type.TypeReportHandler;
+
 public class ReportTypeMenu extends BasicMenu {
     @Override
     public void showMenu() {
         System.out.println("Type Report Menu");
-        // Type report for this month.
-        // Type report for last month.
-        // Type report for the last 3 months (not including this month) on average
-        // Type report for x months (start month - end months)
-        // Type report for all (excluding future transactions)
-
-        // Quick glance?? How to implement this in this program.
-
-        System.out.println("1. Type Report menu");
-        System.out.println("2. Name (Company/Brand) Report menu");
-        System.out.println("3. Location Report menu");
-        System.out.println("4. Budget Report menu");
+        System.out.println("1. Type report for this month");
+        System.out.println("2. Type report for last month");
+        System.out.println("3. Type report for an input month");
+        System.out.println("4. Type report for last 'N' months (excluding this month) - Total");
+        System.out.println("5. Type report for last 'N' months (excluding this month) - Average");
+        System.out.println("6. Type report for 'N' month with StartMonth and EndMonth - Total");
+        System.out.println("7. Type report for 'N' month with StartMonth and EndMonth - Average");
+        System.out.println("8. Type report for all transactions - Until today");
+        System.out.println("9. Type report for all transactions - Including future");
+        // TODO: How to implement quick glance???
         System.out.println("0. Exit this menu");
         System.out.print("Select: ");
         option = scanner.nextInt();
@@ -23,13 +23,16 @@ public class ReportTypeMenu extends BasicMenu {
         System.out.println(guiSupport.shortDashLine());
         switch (option) {
             case 0 -> System.out.println("Exit Type Report Menu...");
-            case 1 -> new ReportTypeMenu().run();
-            case 2 -> new ReportNameMenu().run();
-            case 3 -> new ReportLocationMenu().run();
-            case 4 -> new ReportBudgetMenu().run();
+            case 3 -> typeReportForInputMonth();
             default -> System.out.println("This feature is not IMPLEMENTED or INVALID input");
         }
         if (option != 0)
             System.out.println(guiSupport.longDashLine());
+    }
+
+    private void typeReportForInputMonth() {
+        System.out.println("Enter YyyyMm: ");
+        String yearMonthString = scanner.nextLine();
+        System.out.println(new TypeReportHandler().getTypeReportFilterByMonth(yearMonthString));
     }
 }

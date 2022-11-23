@@ -3,9 +3,9 @@ package gui;
 import java.util.Scanner;
 
 public abstract class BasicMenu {
-    int option;
-    Scanner scanner;
-    GUISupport guiSupport;
+    protected int option;
+    protected Scanner scanner;
+    protected GUISupport guiSupport;
 
     public BasicMenu() {
         option = -1;

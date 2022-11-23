@@ -31,7 +31,7 @@ public class ReportTypeMenu extends BasicMenu {
     }
 
     private void typeReportForInputMonth() {
-        System.out.println("Enter YyyyMm: ");
+        System.out.print("Enter YyyyMm: ");
         String yearMonthString = scanner.nextLine();
         System.out.println(new TypeReportHandler().getTypeReportFilterByMonth(yearMonthString));
     }

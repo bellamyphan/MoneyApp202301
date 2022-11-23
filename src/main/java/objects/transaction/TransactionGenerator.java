@@ -57,7 +57,7 @@ public class TransactionGenerator {
         String suggestedNoteInput = scanner.nextLine();
         String note = new NoteHandler(type, suggestedNoteInput).selectNote();
         System.out.println(guiSupport.shortDashLine());
-        // Get name.
+        // Get name (Company/Brand)
         String name = new NameHandler(type, note).selectName();
         System.out.println(guiSupport.shortDashLine());
         // Get location.

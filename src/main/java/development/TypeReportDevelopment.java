@@ -10,5 +10,6 @@ public class TypeReportDevelopment {
         Date startDate = new DateHandler("2018-10-01").getDate();
         Date endDate = new DateHandler("2018-10-31").getDate();
         System.out.println(new TypeReportHandler().getTypeReportFilterByTime(startDate, endDate));
+        System.out.println(new TypeReportHandler().getTypeReportFilterByMonth("201810"));
     }
 }

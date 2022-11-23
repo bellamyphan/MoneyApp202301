@@ -5,6 +5,7 @@ import objects.amount.AmountObject;
 import objects.transaction.Transaction;
 import objects.transaction.TransactionHandler;
 import objects.transaction.TransactionObject;
+import tools.DateHandler;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -34,5 +35,24 @@ public class TypeReportHandler {
         }
         result.append("OVERALL BALANCE: ").append(overallBalance);
         return result.toString();
+    }
+
+    public String getTypeReportFilterByMonth(String yearMonthString) {
+        // Check if the input yearMonthString is valid.
+        int stringLength = yearMonthString.length();
+        if (stringLength < 6) {
+            // todo: throw invalid input HERE.
+            return null;
+        }
+        // Get the year and month string to construct correct form to use year month string.
+        String year = yearMonthString.substring(0, 4);
+        String month = yearMonthString.substring(stringLength - 2);
+        String formattedYearMonthString = year + "-" + month;
+        // Use DateHandler to get the first and last day of this month.
+        DateHandler dateHandler = new DateHandler(formattedYearMonthString);
+        Date firstDayOfMonth = dateHandler.getFirstDayOfThisMonth();
+        Date lastDayOfMonth = dateHandler.getLastDayOfThisMonth();
+        // Return the result.
+        return getTypeReportFilterByTime(firstDayOfMonth, lastDayOfMonth);
     }
 }

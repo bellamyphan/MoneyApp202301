@@ -28,12 +28,12 @@ public class DateHandler {
         return date;
     }
 
-    public Date getMinDateOfMonth() {
+    public Date getFirstDayOfThisMonth() {
         String newDateString = getSimpleDateString().substring(0, 7);
         return new DateHandler(newDateString).getDate();
     }
 
-    public Date getMaxDateOfMonth() {
+    public Date getLastDayOfThisMonth() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);

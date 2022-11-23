@@ -1,5 +1,7 @@
 package gui;
 
+import gui.transaction.TransactionMenu;
+
 public class MainMenu extends BasicMenu {
     @Override
     public void showMenu() {

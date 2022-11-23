@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class NameHandler {
+public class NameSuggestBasedHistory {
     List<String> suggestedNames;
 
-    public NameHandler(Type type, String note) {
+    public NameSuggestBasedHistory(Type type, String note) {
         List<Transaction> typedNotedTransactions = new TransactionHandler(new TransactionReaderDAO().getTransactions())
                 .getFilteredTransactions(type, note);
         suggestedNames = new ArrayList<>();
@@ -46,7 +46,8 @@ public class NameHandler {
             System.out.println("Confirm name (Company/Brand): " + finalName);
         } else {
             System.out.print("Enter your new name (Company/Brand): ");
-            finalName = scanner.nextLine();
+            String suggestedInput = scanner.nextLine();
+            finalName = new NameSuggestBasedInput(suggestedInput).selectName();
         }
         return finalName;
     }

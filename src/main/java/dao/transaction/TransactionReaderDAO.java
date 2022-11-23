@@ -48,29 +48,6 @@ public class TransactionReaderDAO {
         return transactions;
     }
 
-    public List<Transaction> getTransactions(Type type) {
-        List<Transaction> typedTransactions = new ArrayList<>();
-        for (Transaction transaction : transactions) {
-            if (transaction instanceof TransactionObject) {
-                if (((TransactionObject) transaction).getType() == type) {
-                    typedTransactions.add(transaction);
-                }
-            }
-        }
-        return typedTransactions;
-    }
-
-    public List<Transaction> getTransactions(Type type, String note) {
-        List<Transaction> typedTransactions = getTransactions(type);
-        List<Transaction> typedNotedTransactions = new ArrayList<>();
-        for (Transaction transaction : typedTransactions) {
-            if (transaction.getNote().compareToIgnoreCase(note) == 0) {
-                typedNotedTransactions.add(transaction);
-            }
-        }
-        return typedNotedTransactions;
-    }
-
     public int getAutomatedTransactionId() {
         if (transactions.size() == 0) {
             return 0;

@@ -1,12 +1,10 @@
 package gui;
 
 import dao.transaction.TransactionWriterDAO;
-import objects.transaction.Transaction;
 import dao.transaction.TransactionReaderDAO;
 import objects.transaction.TransactionGenerator;
+import objects.transaction.TransactionHandler;
 import objects.transaction.TransactionObject;
-
-import java.util.List;
 
 public class TransactionMenu extends BasicMenu {
     @Override
@@ -53,10 +51,6 @@ public class TransactionMenu extends BasicMenu {
     }
 
     private void showAllTransactions() {
-        TransactionReaderDAO transactionReaderDAO = new TransactionReaderDAO();
-        List<Transaction> transactions = transactionReaderDAO.getTransactions();
-        for (Transaction transaction : transactions) {
-            System.out.println(transaction);
-        }
+        System.out.println(new TransactionHandler(new TransactionReaderDAO().getTransactions()));
     }
 }

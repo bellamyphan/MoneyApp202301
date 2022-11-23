@@ -20,6 +20,18 @@ public class LocationObject {
         city = new UsCitiesReaderDAO(state).getFormalCityName(getCity(cityStateCountry));
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
     @Override
     public String toString() {
         return city + ", " + state + ", " + country;

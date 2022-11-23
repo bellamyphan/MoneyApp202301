@@ -2,6 +2,7 @@ package objects.note;
 
 import objects.transaction.Transaction;
 import dao.transaction.TransactionReaderDAO;
+import objects.transaction.TransactionHandler;
 import objects.type.Type;
 
 import java.util.LinkedList;
@@ -14,7 +15,8 @@ public class NoteHandler {
 
     public NoteHandler(Type type, String suggestionInput) {
         this.suggestionInput = suggestionInput;
-        List<Transaction> typedTransactions = new TransactionReaderDAO().getTransactions(type);
+        List<Transaction> typedTransactions = new TransactionHandler(new TransactionReaderDAO().getTransactions())
+                .getFilteredTransactions(type);
         suggestedNotes = new LinkedList<>();
         for (Transaction transaction : typedTransactions) {
             if (transaction.getNote().toLowerCase().contains(suggestionInput.toLowerCase())) {

@@ -2,6 +2,7 @@ package objects.name;
 
 import objects.transaction.Transaction;
 import dao.transaction.TransactionReaderDAO;
+import objects.transaction.TransactionHandler;
 import objects.transaction.TransactionObject;
 import objects.type.Type;
 
@@ -13,7 +14,8 @@ public class NameHandler {
     List<String> suggestedNames;
 
     public NameHandler(Type type, String note) {
-        List<Transaction> typedNotedTransactions = new TransactionReaderDAO().getTransactions(type, note);
+        List<Transaction> typedNotedTransactions = new TransactionHandler(new TransactionReaderDAO().getTransactions())
+                .getFilteredTransactions(type, note);
         suggestedNames = new ArrayList<>();
         for (Transaction transaction : typedNotedTransactions) {
             if (transaction instanceof TransactionObject) {

@@ -29,6 +29,8 @@ public class TransactionBasicMenu extends BasicMenu {
 
     private void addATransaction() {
         TransactionObject transactionObject = new TransactionGenerator().createNewTransaction();
-        new TransactionWriterDAO().addATransactionToDatabase(transactionObject);
+        if (transactionObject != null) {
+            new TransactionWriterDAO().addATransactionToDatabase(transactionObject);
+        }
     }
 }

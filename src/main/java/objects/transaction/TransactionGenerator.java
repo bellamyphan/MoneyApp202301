@@ -7,7 +7,7 @@ import objects.bank.BankHandler;
 import objects.bank.BankObject;
 import objects.location.LocationHandler;
 import objects.location.LocationObject;
-import objects.name.NameHandler;
+import objects.name.NameSuggestBasedHistory;
 import objects.note.NoteHandler;
 import objects.pending.PendingHandler;
 import objects.type.Type;
@@ -58,7 +58,7 @@ public class TransactionGenerator {
         String note = new NoteHandler(type, suggestedNoteInput).selectNote();
         System.out.println(guiSupport.shortDashLine());
         // Get name (Company/Brand)
-        String name = new NameHandler(type, note).selectName();
+        String name = new NameSuggestBasedHistory(type, note).selectName();
         System.out.println(guiSupport.shortDashLine());
         // Get location.
         // todo: can be based on 100 most current transactions to suggest location.
@@ -78,11 +78,11 @@ public class TransactionGenerator {
         // Confirm transaction is good.
         System.out.println("Created transaction");
         System.out.println(newTransaction);
-        System.out.println("Save this (default NO, type 'yes' or 'y' or BLANK)? ");
+        System.out.print("Save this (default NO, type 'yes' or 'y' or BLANK)? ");
         String finalConfirmation = scanner.nextLine();
-        System.out.println(guiSupport.shortDashLine());
-        return (finalConfirmation.compareToIgnoreCase("y") == 0 ||
-                finalConfirmation.compareToIgnoreCase("yes") == 0) ? newTransaction : null;
+        boolean isSaved = (finalConfirmation.compareToIgnoreCase("y") == 0 ||
+                finalConfirmation.compareToIgnoreCase("yes") == 0);
+        System.out.println("Confirm saved: " + isSaved);
+        return isSaved ? newTransaction : null;
     }
-
 }

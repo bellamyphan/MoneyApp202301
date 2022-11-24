@@ -38,10 +38,10 @@ public class TransactionGenerator {
         // Input date.
         System.out.print("Date yyyy-mm-dd (Leave it BLANK for today's date): ");
         String dateString = scanner.nextLine();
-        Date date;
-        if (dateString == null || dateString.length() < 10) {
+        Date date = null;
+        if (dateString == null || dateString.length() < 6) {
             date = new Date();
-        } else {
+        } else if (dateString.length() <= 10) {
             date = new DateHandler(dateString).getDate();
         }
         System.out.println("Confirm date: " + new DateHandler(date));

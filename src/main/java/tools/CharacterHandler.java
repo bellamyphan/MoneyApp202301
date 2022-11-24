@@ -15,7 +15,11 @@ public class CharacterHandler {
         return 65 <= ch && ch <= 90;
     }
 
-    public boolean isAlphabetDigit() {
+    public boolean isAlphabet() {
         return isLowerCase() || isUpperCase();
+    }
+
+    public boolean isNumber() {
+        return 48 <= ch && ch <= 57;
     }
 }

@@ -1,5 +1,8 @@
 package tools;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class StringHandler {
     String string;
 
@@ -7,9 +10,22 @@ public class StringHandler {
         this.string = string;
     }
 
+    public List<String> getWords() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < string.length(); i++) {
+            if (new CharacterHandler(string.charAt(i)).isAlphabet()) {
+                stringBuilder.append(string.charAt(i));
+            } else {
+                stringBuilder.append(" ");
+            }
+        }
+        String newString = stringBuilder.toString();
+        return Arrays.asList(newString.split(" "));
+    }
+
     public boolean isAllNumberDigit() {
         for (int i = 0; i < string.length(); i++) {
-            if (!isNumberDigit(string.charAt(i))) {
+            if (!new CharacterHandler(string.charAt(i)).isNumber()) {
                 return false;
             }
         }
@@ -18,18 +34,14 @@ public class StringHandler {
 
     public boolean isAllLowerCaseCharacter() {
         for (int i = 0; i < string.length(); i++) {
-            if (!isLowerCaseCharacter(string.charAt(i))) {
+            if (!new CharacterHandler(string.charAt(i)).isLowerCase()) {
                 return false;
             }
         }
         return true;
     }
 
-    private boolean isNumberDigit(char ch) {
-        return 48 <= ch && ch <= 57;
-    }
 
-    private boolean isLowerCaseCharacter(char ch) {
-        return 97 <= ch && ch <= 122;
-    }
+
+
 }

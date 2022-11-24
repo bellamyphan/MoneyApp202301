@@ -5,14 +5,15 @@ import dao.location.UsStatesReaderDAO;
 import dao.transaction.TransactionReaderDAO;
 import objects.transaction.Transaction;
 import objects.transaction.TransactionObject;
+import objects.type.Type;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class LocationHandler {
-    public LocationObject getLocation() {
-        LocationObject selectedLocation = guessLocationBasedHistory();
+    public LocationObject getLocation(Type type, String name) {
+        LocationObject selectedLocation = guessLocationBasedHistory(type, name);
         if (selectedLocation != null)
             return selectedLocation;
         Scanner scanner = new Scanner(System.in);
@@ -34,15 +35,18 @@ public class LocationHandler {
         return location;
     }
 
-    private LocationObject guessLocationBasedHistory() {
+    private LocationObject guessLocationBasedHistory(Type type, String name) {
         // Get a list of location objects based on most 300 transactions.
         List<Transaction> transactions = new TransactionReaderDAO().getTransactions();
         List<LocationObject> suggestedLocations = new ArrayList<>();
         for (int i = Math.max(0, transactions.size() - 300); i < transactions.size(); i++) {
             Transaction transaction = transactions.get(i);
             if (transaction instanceof TransactionObject) {
-                if (!doesLocationListContain(suggestedLocations, ((TransactionObject) transaction).getLocation())) {
-                    suggestedLocations.add(((TransactionObject) transaction).getLocation());
+                if (((TransactionObject) transaction).getType() == type &&
+                        ((TransactionObject) transaction).getName().compareToIgnoreCase(name) == 0) {
+                    if (!doesLocationListContain(suggestedLocations, ((TransactionObject) transaction).getLocation())) {
+                        suggestedLocations.add(((TransactionObject) transaction).getLocation());
+                    }
                 }
             }
         }

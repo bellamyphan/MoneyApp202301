@@ -62,7 +62,7 @@ public class TransactionGenerator {
         System.out.println(guiSupport.shortDashLine());
         // Get location.
         // todo: can be based on 100 most current transactions to suggest location.
-        LocationObject location = new LocationHandler().getLocation();
+        LocationObject location = new LocationHandler().getLocation(type, name);
         System.out.println(guiSupport.shortDashLine());
         // Get banks
         BankObject primaryBank = new BankHandler().selectPrimaryBank();

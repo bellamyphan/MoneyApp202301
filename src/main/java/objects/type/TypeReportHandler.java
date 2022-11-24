@@ -1,6 +1,8 @@
 package objects.type;
 
 import dao.transaction.TransactionReaderDAO;
+import exception.InvalidYearMonthStringException;
+import exception.InvalidYearStringException;
 import objects.amount.AmountObject;
 import objects.transaction.Transaction;
 import objects.transaction.TransactionHandler;
@@ -41,8 +43,7 @@ public class TypeReportHandler {
         // Check if the input yearMonthString is valid.
         int stringLength = yearMonthString.length();
         if (stringLength < 6) {
-            // todo: throw invalid input HERE.
-            return null;
+            throw new InvalidYearMonthStringException();
         }
         // Get the year and month string to construct correct form to use year month string.
         String year = yearMonthString.substring(0, 4);
@@ -54,5 +55,19 @@ public class TypeReportHandler {
         Date lastDayOfMonth = dateHandler.getLastDayOfThisMonth();
         // Return the result.
         return getTypeReportFilterByTime(firstDayOfMonth, lastDayOfMonth);
+    }
+
+    public String getTypeReportFilterByYear(String yearString) {
+        // Check if the input yearString is valid.
+        int stringLength = yearString.length();
+        if (stringLength < 4) {
+            throw new InvalidYearStringException();
+        }
+        // Get the first date.
+        Date firstDate = new DateHandler(yearString + "-01").getFirstDayOfThisMonth();
+        // Get the last date.
+        Date lastDate = new DateHandler(yearString + "-12").getLastDayOfThisMonth();
+        // Return the result.
+        return getTypeReportFilterByTime(firstDate, lastDate);
     }
 }

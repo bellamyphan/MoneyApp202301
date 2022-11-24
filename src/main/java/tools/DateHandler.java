@@ -1,5 +1,7 @@
 package tools;
 
+import exception.InvalidYearMonthDateStringException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -10,11 +12,21 @@ public class DateHandler {
 
     public DateHandler(String dateString) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        if (dateString.length() < 10) {
-            dateString += "-01";
+        String formalDateString;
+        if (dateString.length() == 4) {
+            formalDateString = dateString + "-01-01";
+        } else if (dateString.length() == 6) {
+            formalDateString = dateString.substring(0, 4) + "-"
+                    + dateString.substring(dateString.length() - 2) + "-01";
+        } else if (dateString.length() == 7) {
+            formalDateString = dateString + "-01";
+        } else if (dateString.length() == 10) {
+            formalDateString = dateString;
+        } else {
+            throw new InvalidYearMonthDateStringException("Length of year month day string is not valid");
         }
         try {
-            date = simpleDateFormat.parse(dateString);
+            date = simpleDateFormat.parse(formalDateString);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

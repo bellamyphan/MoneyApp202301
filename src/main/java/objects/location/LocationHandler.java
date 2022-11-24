@@ -50,7 +50,10 @@ public class LocationHandler {
                 }
             }
         }
-        // Pick a location.
+        // Pick a location if there are any.
+        if (suggestedLocations.size() == 0) {
+            return null;
+        }
         int i;
         for (i = 0; i < suggestedLocations.size(); i++) {
             System.out.println(i + ". " + suggestedLocations.get(i));

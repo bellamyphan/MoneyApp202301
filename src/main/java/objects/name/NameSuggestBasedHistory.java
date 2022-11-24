@@ -45,7 +45,7 @@ public class NameSuggestBasedHistory {
             finalName = suggestedNames.get(option);
             System.out.println("Confirm name (Company/Brand): " + finalName);
         } else {
-            System.out.print("Enter your new name (Company/Brand): ");
+            System.out.print("Enter any name (Company/Brand) for suggestion: ");
             String suggestedInput = scanner.nextLine();
             finalName = new NameSuggestBasedInput(suggestedInput).selectName();
         }

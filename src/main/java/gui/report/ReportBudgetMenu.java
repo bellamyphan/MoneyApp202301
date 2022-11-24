@@ -1,4 +1,6 @@
-package gui;
+package gui.report;
+
+import gui.BasicMenu;
 
 public class ReportBudgetMenu extends BasicMenu {
     // Budget should be dynamic or static for each month? => Budget should be available for the current month only?

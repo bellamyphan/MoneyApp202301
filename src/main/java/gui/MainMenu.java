@@ -1,5 +1,6 @@
 package gui;
 
+import gui.report.ReportMenu;
 import gui.transaction.TransactionMenu;
 
 public class MainMenu extends BasicMenu {

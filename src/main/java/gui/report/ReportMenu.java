@@ -1,4 +1,6 @@
-package gui;
+package gui.report;
+
+import gui.BasicMenu;
 
 public class ReportMenu extends BasicMenu {
 

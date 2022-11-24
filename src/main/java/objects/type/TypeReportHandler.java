@@ -43,7 +43,7 @@ public class TypeReportHandler {
         // Check if the input yearMonthString is valid.
         int stringLength = yearMonthString.length();
         if (stringLength < 6) {
-            throw new InvalidYearMonthStringException();
+            throw new InvalidYearMonthStringException("Length of the yearMonth string is less than 6");
         }
         // Get the year and month string to construct correct form to use year month string.
         String year = yearMonthString.substring(0, 4);
@@ -61,7 +61,7 @@ public class TypeReportHandler {
         // Check if the input yearString is valid.
         int stringLength = yearString.length();
         if (stringLength < 4) {
-            throw new InvalidYearStringException();
+            throw new InvalidYearStringException("Length of year string is less than 4");
         }
         // Get the first date.
         Date firstDate = new DateHandler(yearString + "-01").getFirstDayOfThisMonth();

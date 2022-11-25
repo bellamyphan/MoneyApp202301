@@ -45,13 +45,14 @@ public class NoteHandler {
         inputString = scanner.nextLine();
         // Convert to an integer if inputString is an integer.
         int option = -1;
-        if (new StringHandler(inputString).isAllNumberDigit()) {
-            option = Integer.parseInt(inputString);
+        if (inputString.length() > 0) {
+            if (new StringHandler(inputString).isAllNumberDigit()) {
+                option = Integer.parseInt(inputString);
+            }
         }
         // Get suggested notes if we get a valid integer input.
         if (0 <= option && option < suggestedNotes.size()) {
             finalNote = suggestedNotes.get(option);
-            System.out.println("Confirm note: " + finalNote);
         } else {
             finalNote = inputString;
         }

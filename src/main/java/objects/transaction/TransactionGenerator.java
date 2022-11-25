@@ -60,6 +60,11 @@ public class TransactionGenerator {
         TransactionObject newTransaction = new TransactionObject(automatedId, TransactionType.NORMAL, date, amount,
                 note, primaryBank, isPending, type, name, location, secondaryBank);
         // Confirm transaction is good.
+        boolean isSaved = confirmTransactionIsGood(scanner, newTransaction);
+        return isSaved ? newTransaction : null;
+    }
+
+    private static boolean confirmTransactionIsGood(Scanner scanner, TransactionObject newTransaction) {
         System.out.println("Created transaction");
         System.out.println(newTransaction);
         System.out.print("Save this (default NO, type 'yes' or 'y' or BLANK)? ");
@@ -67,7 +72,7 @@ public class TransactionGenerator {
         boolean isSaved = (finalConfirmation.compareToIgnoreCase("y") == 0 ||
                 finalConfirmation.compareToIgnoreCase("yes") == 0);
         System.out.println("Confirm saved: " + isSaved);
-        return isSaved ? newTransaction : null;
+        return isSaved;
     }
 
     private static boolean getIsPending() {

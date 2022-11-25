@@ -2,6 +2,7 @@ package objects.transaction;
 
 import dao.transaction.TransactionReaderDAO;
 import gui.GUISupport;
+import objects.amount.AmountHandler;
 import objects.amount.AmountObject;
 import objects.bank.BankHandler;
 import objects.bank.BankObject;
@@ -14,7 +15,6 @@ import objects.type.Type;
 import objects.type.TypeHandler;
 import tools.DateHandler;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -29,28 +29,16 @@ public class TransactionGenerator {
     public TransactionObject createNewTransaction() {
         Scanner scanner = new Scanner(System.in);
         // Automated transaction id.
-        int automatedId = new TransactionReaderDAO().getAutomatedTransactionId();
-        System.out.println("Id: " + automatedId);
+        int automatedId = getAutomatedId();
         System.out.println(guiSupport.shortDashLine());
         // Select type.
-        Type type = new TypeHandler().selectType();
+        Type type = getType();
         System.out.println(guiSupport.shortDashLine());
         // Input date.
-        System.out.print("Date yyyy-mm-dd (Leave it BLANK for today's date): ");
-        String dateString = scanner.nextLine();
-        Date date = null;
-        if (dateString == null || dateString.length() < 6) {
-            date = new Date();
-        } else if (dateString.length() <= 10) {
-            date = new DateHandler(dateString).getDate();
-        }
-        System.out.println("Confirm date: " + new DateHandler(date));
+        Date date = getDate(scanner);
         System.out.println(guiSupport.shortDashLine());
         // Get the amount.
-        System.out.print("Enter amount (assumed USD): ");
-        String amountString = scanner.nextLine();
-        AmountObject amount = new AmountObject(new BigDecimal(amountString.length() > 0 ? amountString : "0"));
-        System.out.println("Confirm amount: " + amount);
+        AmountObject amount = new AmountHandler().getAmountInputFromUser(type);
         System.out.println(guiSupport.shortDashLine());
         // Get notes with suggestion.
         System.out.print("Note (type something for suggestion): ");
@@ -84,5 +72,28 @@ public class TransactionGenerator {
                 finalConfirmation.compareToIgnoreCase("yes") == 0);
         System.out.println("Confirm saved: " + isSaved);
         return isSaved ? newTransaction : null;
+    }
+
+    private static Date getDate(Scanner scanner) {
+        Date date = null;
+        System.out.print("Date yyyy-mm-dd (Leave it BLANK for today's date): ");
+        String dateString = scanner.nextLine();
+        if (dateString == null || dateString.length() < 6) {
+            date = new Date();
+        } else if (dateString.length() <= 10) {
+            date = new DateHandler(dateString).getDate();
+        }
+        System.out.println("Confirm date: " + new DateHandler(date));
+        return date;
+    }
+
+    private Type getType() {
+        return new TypeHandler().selectType();
+    }
+
+    private int getAutomatedId() {
+        int automatedId = new TransactionReaderDAO().getAutomatedTransactionId();
+        System.out.println("Automated id: " + automatedId);
+        return automatedId;
     }
 }

@@ -62,6 +62,10 @@ public class TransactionHandler {
         for (Transaction transaction : transactions) {
             finalString.append(transaction.toString()).append("\n");
         }
-        return finalString.substring(0, finalString.length() - 1);
+        if (finalString.length() == 0) {
+            return "";
+        } else {
+            return finalString.substring(0, finalString.length() - 1);
+        }
     }
 }

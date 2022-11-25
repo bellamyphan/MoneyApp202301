@@ -4,6 +4,7 @@ import objects.transaction.Transaction;
 import dao.transaction.TransactionReaderDAO;
 import objects.transaction.TransactionHandler;
 import objects.type.Type;
+import tools.StringHandler;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,27 +29,35 @@ public class NoteHandler {
     }
 
     public String selectNote() {
+        // Initialize variables.
         String finalNote;
         Scanner scanner = new Scanner(System.in);
-        int option = 0;
+        String inputString;
+        // Output suggested notes.
         if (suggestedNotes.size() > 0) {
-            System.out.println("Select a note:");
-            int i;
-            for (i = 0; i < suggestedNotes.size(); i++) {
+            System.out.println("Suggested notes:");
+            for (int i = 0; i < suggestedNotes.size(); i++) {
                 System.out.println(i + ". " + suggestedNotes.get(i));
             }
-            System.out.println(i + ". ENTER YOUR NEW NOTES");
-            System.out.print("Your selection: ");
-            option = scanner.nextInt();
-            scanner.nextLine();
         }
-        if (option < suggestedNotes.size()) {
+        // Get input from user.
+        System.out.print("Select a suggested notes or enter new notes: ");
+        inputString = scanner.nextLine();
+        // Convert to an integer if inputString is an integer.
+        int option = -1;
+        if (inputString.length() > 0) {
+            if (new StringHandler(inputString).isAllNumberDigit()) {
+                option = Integer.parseInt(inputString);
+            }
+        }
+        // Get suggested notes if we get a valid integer input.
+        if (0 <= option && option < suggestedNotes.size()) {
             finalNote = suggestedNotes.get(option);
-            System.out.println("Confirm note: " + finalNote);
         } else {
-            System.out.print("Enter your new notes: ");
-            finalNote = scanner.nextLine();
+            finalNote = inputString;
         }
+        // Confirm and return note.
+        System.out.println("Confirm note: " + finalNote);
         return finalNote;
     }
 }

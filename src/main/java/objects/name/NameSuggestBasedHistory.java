@@ -27,9 +27,11 @@ public class NameSuggestBasedHistory {
     }
 
     public String selectName() {
+        // Initialize variables.
         String finalName;
         Scanner scanner = new Scanner(System.in);
         int option = 0;
+        // Output suggested names.
         if (suggestedNames.size() > 0) {
             System.out.println("Select a name (Company/Brand):");
             int i;
@@ -41,14 +43,18 @@ public class NameSuggestBasedHistory {
             option = scanner.nextInt();
             scanner.nextLine();
         }
+        // Get the suggested name.
         if (option < suggestedNames.size()) {
             finalName = suggestedNames.get(option);
             System.out.println("Confirm name (Company/Brand): " + finalName);
-        } else {
+        }
+        // Get the new name not in the suggested list.
+        else {
             System.out.print("Enter any name (Company/Brand) for suggestion: ");
             String suggestedInput = scanner.nextLine();
             finalName = new NameSuggestBasedInput(suggestedInput).selectName();
         }
+        // Return statement.
         return finalName;
     }
 }

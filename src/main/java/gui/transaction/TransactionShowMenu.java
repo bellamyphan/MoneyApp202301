@@ -47,10 +47,9 @@ public class TransactionShowMenu extends BasicMenu {
     }
 
     private void showAllTransactionsForInputMonth() {
-        System.out.println("Enter year month string (yyyyMM or yyyy-mm): ");
+        System.out.print("Enter year month string (yyyyMM or yyyy-mm): ");
         String yearMonthString = scanner.nextLine();
-        DateHandler dateHandler = new DateHandler(yearMonthString.substring(0, 4) + "-"
-                + yearMonthString.substring(yearMonthString.length() - 2));
+        DateHandler dateHandler = new DateHandler(yearMonthString);
         List<Transaction> transactions = new TransactionHandler(new TransactionReaderDAO().getTransactions())
                 .getFilteredTransactions(dateHandler.getFirstDayOfThisMonth(), dateHandler.getLastDayOfThisMonth());
         System.out.println(new TransactionHandler(transactions));

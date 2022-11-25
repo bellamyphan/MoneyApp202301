@@ -15,11 +15,21 @@ import java.util.List;
 
 public class TypeReportHandler {
     public String getTypeReportFilterByTime(Date start, Date end) {
+        // Initialize variables.
         StringBuilder result = new StringBuilder();
         AmountObject overallBalance = new AmountObject(new BigDecimal("0"));
+        // Get filtered transactions.
         List<Transaction> allTransactions = new TransactionReaderDAO().getTransactions();
-        List<Transaction> filteredTransactions = new TransactionHandler(allTransactions)
-                .getFilteredTransactions(start, end);
+        List<Transaction> filteredTransactions;
+        if (start != null) {
+            filteredTransactions = new TransactionHandler(allTransactions)
+                    .getFilteredTransactions(start, end);
+        } else {
+            filteredTransactions = new TransactionHandler(allTransactions)
+                    .getFilteredTransactionsUntilDate(end);
+        }
+
+        // Summarize per type and keep track overall balance.
         for (Type type : Type.values()) {
             AmountObject balance = new AmountObject(new BigDecimal("0"));
             for (Transaction transaction : filteredTransactions) {
@@ -36,7 +46,12 @@ public class TypeReportHandler {
             result.append(type.toString()).append(": ").append(balance).append("\n");
         }
         result.append("OVERALL BALANCE: ").append(overallBalance);
+        // Return statement.
         return result.toString();
+    }
+
+    public String getTypeReportFilterUntilToday() {
+        return getTypeReportFilterByTime(null, new Date());
     }
 
     public String getTypeReportFilterByMonth(String yearMonthString) {

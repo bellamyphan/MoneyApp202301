@@ -17,7 +17,7 @@ public class ReportTypeMenu extends BasicMenu {
         System.out.println("8. Type report for 'N' month with StartMonth and EndMonth - Average");
         System.out.println("9. Type report for all transactions - Until today");
         System.out.println("10. Type report for all transactions - Including future");
-        // TODO: How to implement quick glance???
+        System.out.println("11. Quick glance for the input month");
         System.out.println("0. Exit this menu");
         System.out.print("Select: ");
         option = scanner.nextInt();
@@ -27,6 +27,7 @@ public class ReportTypeMenu extends BasicMenu {
             case 0 -> System.out.println("Exit Type Report Menu...");
             case 3 -> typeReportForInputMonth();
             case 4 -> typeReportForInputYear();
+            case 9 -> typeReportAllUntilToday();
             default -> System.out.println("This feature is not IMPLEMENTED or INVALID input");
         }
         if (option != 0)
@@ -43,5 +44,9 @@ public class ReportTypeMenu extends BasicMenu {
         System.out.print("Enter yyyy: ");
         String yearString = scanner.nextLine();
         System.out.println(new TypeReportHandler().getTypeReportFilterByYear(yearString));
+    }
+
+    private void typeReportAllUntilToday() {
+        System.out.println(new TypeReportHandler().getTypeReportFilterUntilToday());
     }
 }

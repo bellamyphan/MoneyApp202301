@@ -46,6 +46,16 @@ public class TransactionHandler {
         return filteredTransactions;
     }
 
+    public List<Transaction> getFilteredTransactionsUntilDate(Date endDate) {
+        List<Transaction> filteredTransactions = new ArrayList<>();
+        for (Transaction transaction : transactions) {
+            if (endDate.compareTo(transaction.getDate()) >= 0) {
+                filteredTransactions.add(transaction);
+            }
+        }
+        return filteredTransactions;
+    }
+
     @Override
     public String toString() {
         StringBuilder finalString = new StringBuilder();

@@ -41,15 +41,12 @@ public class TransactionGenerator {
         AmountObject amount = new AmountHandler().getAmountInputFromUser(type);
         System.out.println(guiSupport.shortDashLine());
         // Get notes with suggestion.
-        System.out.print("Note (type something for suggestion): ");
-        String suggestedNoteInput = scanner.nextLine();
-        String note = new NoteHandler(type, suggestedNoteInput).selectNote();
+        String note = getNote(scanner, type);
         System.out.println(guiSupport.shortDashLine());
         // Get name (Company/Brand)
         String name = new NameSuggestBasedHistory(type, note).selectName();
         System.out.println(guiSupport.shortDashLine());
         // Get location.
-        // todo: can be based on 100 most current transactions to suggest location.
         LocationObject location = new LocationHandler().getLocation(type, name);
         System.out.println(guiSupport.shortDashLine());
         // Get banks
@@ -57,8 +54,7 @@ public class TransactionGenerator {
         BankObject secondaryBank = new BankHandler().selectSecondaryBank(primaryBank);
         System.out.println(guiSupport.shortDashLine());
         // Is pending?
-        boolean isPending = new PendingHandler().getIsPending();
-        System.out.println("Confirm isPending: " + isPending);
+        boolean isPending = getIsPending();
         System.out.println(guiSupport.shortDashLine());
         // Created a new transaction.
         TransactionObject newTransaction = new TransactionObject(automatedId, TransactionType.NORMAL, date, amount,
@@ -72,6 +68,18 @@ public class TransactionGenerator {
                 finalConfirmation.compareToIgnoreCase("yes") == 0);
         System.out.println("Confirm saved: " + isSaved);
         return isSaved ? newTransaction : null;
+    }
+
+    private static boolean getIsPending() {
+        boolean isPending = new PendingHandler().getIsPending();
+        System.out.println("Confirm isPending: " + isPending);
+        return isPending;
+    }
+
+    private static String getNote(Scanner scanner, Type type) {
+        System.out.print("Note (type something for suggestion): ");
+        String suggestedNoteInput = scanner.nextLine();
+        return new NoteHandler(type, suggestedNoteInput).selectNote();
     }
 
     private static Date getDate(Scanner scanner) {

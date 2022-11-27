@@ -24,8 +24,4 @@ public class TransactionMenu extends BasicMenu {
         if (option != 0)
             System.out.println(guiSupport.longDashLine());
     }
-
-
-
-
 }

@@ -52,6 +52,10 @@ public class NameSuggestBasedHistory {
                 option = Integer.parseInt(inputString);
             }
         }
+        // Get quick name selection from user.
+        if (inputString.length() == 0 && suggestedNames.size() > 0) {
+            option = 0;
+        }
         // Get suggested name if we get a valid integer input.
         if (0 <= option && option < suggestedNames.size()) {
             finalName = suggestedNames.get(option);

@@ -52,6 +52,10 @@ public class NoteSuggestionHandler {
                 option = Integer.parseInt(inputString);
             }
         }
+        // Get quick selection if inputString is empty.
+        if (inputString.length() == 0 && suggestedNotes.size() > 0) {
+            option = 0;
+        }
         // Get suggested notes if we get a valid integer input.
         if (0 <= option && option < suggestedNotes.size()) {
             finalNote = suggestedNotes.get(option);

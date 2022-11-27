@@ -53,7 +53,7 @@ public class TransactionGenerator {
         String name = new NameSuggestBasedHistory(transactions, type, note).selectName();
         System.out.println(guiSupport.shortDashLine());
         // Get location.
-        LocationObject location = new LocationHandler().getLocation(transactions, type, name);
+        LocationObject location = new LocationHandler(transactions, type, name).getLocation();
         System.out.println(guiSupport.shortDashLine());
         // Get banks
         BankObject primaryBank = new BankHandler().selectPrimaryBank();

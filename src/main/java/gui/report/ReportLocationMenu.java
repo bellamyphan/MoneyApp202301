@@ -1,6 +1,7 @@
 package gui.report;
 
 import gui.BasicMenu;
+import objects.location.LocationReportHandler;
 
 public class ReportLocationMenu extends BasicMenu {
     @Override
@@ -15,7 +16,8 @@ public class ReportLocationMenu extends BasicMenu {
         System.out.println("7. Location report for 'N' month with StartMonth and EndMonth - Total");
         System.out.println("8. Location report for 'N' month with StartMonth and EndMonth - Average");
         System.out.println("9. Location report for all transactions - Until today");
-        System.out.println("10. Location report for all transactions - Including future");
+        System.out.println("10. Location report per name for all transactions - Until today");
+        System.out.println("11. Location report for all transactions - Including future");
         System.out.println("0. Exit this menu");
         System.out.print("Select: ");
         option = scanner.nextInt();
@@ -23,6 +25,8 @@ public class ReportLocationMenu extends BasicMenu {
         System.out.println(guiSupport.shortDashLine());
         switch (option) {
             case 0 -> System.out.println("Exit Location Report Menu...");
+            case 9 -> System.out.println(new LocationReportHandler().getLocationReportFilterUntilToday());
+            case 10 -> System.out.println(new LocationReportHandler().getLocationPerNameReportFilterUntilToday());
             default -> System.out.println("This feature is not IMPLEMENTED or INVALID input");
         }
         if (option != 0)

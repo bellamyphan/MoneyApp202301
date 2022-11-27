@@ -32,7 +32,7 @@ public class TransactionGenerator {
         int automatedId = getAutomatedId();
         System.out.println(guiSupport.shortDashLine());
         // Select type.
-        Type type = getType();
+        Type type = new TypeHandler().selectType();
         System.out.println(guiSupport.shortDashLine());
         // Input date.
         Date date = getDate(scanner);
@@ -98,10 +98,6 @@ public class TransactionGenerator {
         }
         System.out.println("Confirm date: " + new DateHandler(date));
         return date;
-    }
-
-    private Type getType() {
-        return new TypeHandler().selectType();
     }
 
     private int getAutomatedId() {

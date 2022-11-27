@@ -18,31 +18,36 @@ public class TypeHandler {
         // Initialize variables.
         Type selectedType = null;
         Scanner scanner = new Scanner(System.in);
-        // Get input from the user.
-        System.out.println("Select or enter type:");
-        for (int i = 0; i < typeList.size(); i++) {
-            if (i > 0 && i % 8 == 0) {
-                System.out.println();
+        String inputString;
+        // Loop until get a valid type.
+        while (selectedType == null) {
+            // Get input from the user.
+            System.out.println("Select or enter type:");
+            for (int i = 0; i < typeList.size(); i++) {
+                if (i > 0 && i % 8 == 0) {
+                    System.out.println();
+                }
+                System.out.print(i + "-" + typeList.get(i) + "\t");
             }
-            System.out.print(i + "-" + typeList.get(i) + "\t");
-        }
-        System.out.print("\nYour input: ");
-        String input = scanner.nextLine();
-        // Get selected type if input is an integer.
-        if (new StringHandler(input).isAllNumberDigit()) {
-            int option = Integer.parseInt(input);
-            selectedType = typeList.get(option);
+            System.out.print("\nYour input: ");
+            inputString = scanner.nextLine();
+            // Get selected type if input is an integer.
+            if (new StringHandler(inputString).isAllNumberDigit()) {
+                int option = Integer.parseInt(inputString);
+                selectedType = typeList.get(option);
 
-        }
-        // Get selected type if input is a string.
-        if (new StringHandler(input).isAllLowerCaseCharacter()) {
-            selectedType = getTypeFromString(input);
-            if (selectedType == null) {
-                selectedType = getMostConfidentTypeFromString(input);
             }
+            // Get selected type if input is a string.
+            if (new StringHandler(inputString).isAllLowerCaseCharacter()) {
+                selectedType = getTypeFromString(inputString);
+                if (selectedType == null) {
+                    selectedType = getMostConfidentTypeFromString(inputString);
+                }
+            }
+            // Confirm type.
+            System.out.println("Confirm type: " + selectedType);
         }
-        // Confirm and return.
-        System.out.println("Confirm type: " + selectedType);
+        // Return statement.
         return selectedType;
     }
 

@@ -18,7 +18,7 @@ public class TypeReportHandler {
         // Initialize variables.
         StringBuilder result = new StringBuilder();
         AmountObject overallBalance = new AmountObject(new BigDecimal("0"));
-        // Get filtered transactions.
+        // Get filtered transactions by time.
         List<Transaction> allTransactions = new TransactionReaderDAO().getTransactions();
         List<Transaction> filteredTransactions;
         if (start != null) {
@@ -28,7 +28,6 @@ public class TypeReportHandler {
             filteredTransactions = new TransactionHandler(allTransactions)
                     .getFilteredTransactionsUntilDate(end);
         }
-
         // Summarize per type and keep track overall balance.
         for (Type type : Type.values()) {
             AmountObject balance = new AmountObject(new BigDecimal("0"));

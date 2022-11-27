@@ -48,22 +48,6 @@ public class TransactionReaderDAO {
         return transactions;
     }
 
-    public int getAutomatedTransactionId() {
-        if (transactions.size() == 0) {
-            return 0;
-        } else {
-            return transactions.get(transactions.size() - 1).getId() + 1;
-        }
-    }
-
-    public Date getAutomatedDate() {
-        if (transactions.size() == 0) {
-            return null;
-        } else {
-            return transactions.get(transactions.size() - 1).getDate();
-        }
-    }
-
     private TransactionObject getTransactionFromTransactionLine(String[] transactionLine) {
         int id = Integer.parseInt(DoubleQuoteHandler.removeDoubleQuote(transactionLine[0]));
         TransactionType transactionType =

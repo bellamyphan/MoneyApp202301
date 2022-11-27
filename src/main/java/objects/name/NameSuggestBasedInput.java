@@ -1,8 +1,8 @@
 package objects.name;
 
-import dao.transaction.TransactionReaderDAO;
 import objects.transaction.Transaction;
 import objects.transaction.TransactionObject;
+import tools.StringHandler;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -11,10 +11,11 @@ import java.util.Scanner;
 public class NameSuggestBasedInput {
     String suggestionInput;
     List<String> suggestedNames;
+    List<Transaction> transactions;
 
-    public NameSuggestBasedInput(String suggestionInput) {
+    public NameSuggestBasedInput(List<Transaction> transactions, String suggestionInput) {
+        this.transactions = transactions;
         this.suggestionInput = suggestionInput;
-        List<Transaction> transactions = new TransactionReaderDAO().getTransactions();
         suggestedNames = new LinkedList<>();
         for (Transaction transaction : transactions) {
             if (transaction instanceof TransactionObject) {
@@ -28,27 +29,36 @@ public class NameSuggestBasedInput {
     }
 
     public String selectName() {
+        // Initialize variables.
         String finalName;
         Scanner scanner = new Scanner(System.in);
-        int option = 0;
+        String inputString;
+        // Output suggested names.
         if (suggestedNames.size() > 0) {
-            System.out.println("Select a name (company/brand):");
-            int i;
-            for (i = 0; i < suggestedNames.size(); i++) {
+            System.out.println("Select or input a name (Company/Brand):");
+            for (int i = 0; i < suggestedNames.size(); i++) {
                 System.out.println(i + ". " + suggestedNames.get(i));
             }
-            System.out.println(i + ". ENTER YOUR NEW NAME (COMPANY/BRAND)");
-            System.out.print("Your selection: ");
-            option = scanner.nextInt();
-            scanner.nextLine();
         }
-        if (option < suggestedNames.size()) {
+        // Get input from user.
+        System.out.print("Choose a name or input new name(with suggestion): ");
+        inputString = scanner.nextLine();
+        // Convert to an integer if inputString is an integer.
+        int option = -1;
+        if (inputString.length() > 0) {
+            if (new StringHandler(inputString).isAllNumberDigit()) {
+                option = Integer.parseInt(inputString);
+            }
+        }
+        // Get suggested name if we get a valid integer input.
+        if (0 <= option && option < suggestedNames.size()) {
             finalName = suggestedNames.get(option);
-            System.out.println("Confirm name (company/brand): " + finalName);
-        } else {
-            System.out.print("Enter your new name (company/brand): ");
-            finalName = scanner.nextLine();
         }
+        // Get the new name not in the suggested list.
+        else {
+            finalName = inputString;
+        }
+        // Return statement.
         return finalName;
     }
 }

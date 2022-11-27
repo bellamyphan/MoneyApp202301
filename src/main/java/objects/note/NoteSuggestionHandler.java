@@ -1,7 +1,6 @@
 package objects.note;
 
 import objects.transaction.Transaction;
-import dao.transaction.TransactionReaderDAO;
 import objects.transaction.TransactionHandler;
 import objects.type.Type;
 import tools.StringHandler;
@@ -11,14 +10,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-public class NoteHandler {
+public class NoteSuggestionHandler {
     String suggestionInput;
     List<String> suggestedNotes;
+    List<Transaction> transactions;
 
-    public NoteHandler(Type type, String suggestionInput) {
+    public NoteSuggestionHandler(List<Transaction> transactions, Type type, String suggestionInput) {
         this.suggestionInput = suggestionInput;
-        List<Transaction> typedTransactions = new TransactionHandler(new TransactionReaderDAO().getTransactions())
-                .getFilteredTransactions(type);
+        this.transactions = transactions;
+        List<Transaction> typedTransactions = new TransactionHandler(transactions).getFilteredTransactions(type);
         suggestedNotes = new LinkedList<>();
         for (Transaction transaction : typedTransactions) {
             if (transaction.getNote().toLowerCase().contains(suggestionInput.toLowerCase())) {

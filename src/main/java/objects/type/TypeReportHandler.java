@@ -12,6 +12,7 @@ import tools.DateHandler;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.ListIterator;
 
 public class TypeReportHandler {
     public String getTypeReportFilterByTime(Date start, Date end) {
@@ -31,10 +32,13 @@ public class TypeReportHandler {
         // Summarize per type and keep track overall balance.
         for (Type type : Type.values()) {
             AmountObject balance = new AmountObject(new BigDecimal("0"));
-            for (Transaction transaction : filteredTransactions) {
+            ListIterator<Transaction> listIterator = filteredTransactions.listIterator();
+            while(listIterator.hasNext()) {
+                Transaction transaction = listIterator.next();
                 if (transaction instanceof TransactionObject) {
                     if (((TransactionObject) transaction).getType() == type) {
                         balance = balance.add(transaction.getAmount());
+                        listIterator.remove();
                     }
                 }
             }

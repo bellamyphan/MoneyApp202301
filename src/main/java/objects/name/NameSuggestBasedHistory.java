@@ -7,6 +7,7 @@ import objects.transaction.TransactionObject;
 import objects.type.Type;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,6 +25,7 @@ public class NameSuggestBasedHistory {
                 }
             }
         }
+        Collections.reverse(suggestedNames);
     }
 
     public String selectName() {

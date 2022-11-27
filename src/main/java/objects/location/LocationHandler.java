@@ -8,14 +8,17 @@ import objects.transaction.TransactionObject;
 import objects.type.Type;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 public class LocationHandler {
     public LocationObject getLocation(Type type, String name) {
+        // Select location based on history.
         LocationObject selectedLocation = guessLocationBasedHistory(type, name);
         if (selectedLocation != null)
             return selectedLocation;
+        // Get location based on user input.
         Scanner scanner = new Scanner(System.in);
         UsStatesReaderDAO usStatesReaderDAO = new UsStatesReaderDAO();
         System.out.print("Enter 'cityName, stateCode': ");
@@ -50,6 +53,7 @@ public class LocationHandler {
                 }
             }
         }
+        Collections.reverse(suggestedLocations);
         // Pick a location if there are any.
         if (suggestedLocations.size() == 0) {
             return null;

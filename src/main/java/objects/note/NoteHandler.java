@@ -6,6 +6,7 @@ import objects.transaction.TransactionHandler;
 import objects.type.Type;
 import tools.StringHandler;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,6 +27,7 @@ public class NoteHandler {
                 }
             }
         }
+        Collections.reverse(suggestedNotes);
     }
 
     public String selectNote() {

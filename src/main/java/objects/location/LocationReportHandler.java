@@ -63,7 +63,7 @@ public class LocationReportHandler {
 
     public String getLocationPerNameReportFilterByTime(Date start, Date end) {
         // Initialize variables.
-        StringBuilder result = new StringBuilder();
+        StringBuilder finalStringReport = new StringBuilder();
         AmountObject overallBalance = new AmountObject(new BigDecimal("0"));
         // Get filtered transactions by time.
         List<Transaction> allTransactions = new TransactionReaderDAO().getTransactions();
@@ -96,6 +96,7 @@ public class LocationReportHandler {
         // Summarize per location per name and keep track overall balance and location balance.
         for (LocationObject location : locations) {
             AmountObject locationBalance = new AmountObject(new BigDecimal("0"));
+            StringBuilder locationStringReport = new StringBuilder();
             for (String name : names) {
                 AmountObject nameBalance = new AmountObject(new BigDecimal("0"));
                 ListIterator<Transaction> listIterator = filteredTransactions.listIterator();
@@ -114,15 +115,15 @@ public class LocationReportHandler {
                     continue;
                 }
                 locationBalance = locationBalance.add(nameBalance);
-                result.append(location).append("-").append(name).append(": ")
-                        .append(nameBalance).append("\n");
+                locationStringReport.append("\t").append(name).append(": ").append(nameBalance).append("\n");
             }
-            result.append(location).append(": ").append(locationBalance).append("\n");
+            finalStringReport.append(location).append(": ").append(locationBalance).append("\n");
+            finalStringReport.append(locationStringReport);
             overallBalance = overallBalance.add(locationBalance);
         }
-        result.append("OVERALL BALANCE: ").append(overallBalance);
+        finalStringReport.append("OVERALL BALANCE: ").append(overallBalance);
         // Return statement.
-        return result.toString();
+        return finalStringReport.toString();
     }
 
     public String getLocationReportFilterUntilToday() {
@@ -133,7 +134,7 @@ public class LocationReportHandler {
         return getLocationPerNameReportFilterByTime(null, new Date());
     }
 
-//
+
 //    public String getTypeReportFilterByMonth(String yearMonthString) {
 //        // Check if the input yearMonthString is valid.
 //        int stringLength = yearMonthString.length();

@@ -52,7 +52,15 @@ public class TransactionReaderDAO {
         if (transactions.size() == 0) {
             return 0;
         } else {
-            return transactions.get(transactions.size()-1).getId() + 1;
+            return transactions.get(transactions.size() - 1).getId() + 1;
+        }
+    }
+
+    public Date getAutomatedDate() {
+        if (transactions.size() == 0) {
+            return null;
+        } else {
+            return transactions.get(transactions.size() - 1).getDate();
         }
     }
 

@@ -27,15 +27,19 @@ public class TransactionGenerator {
     }
 
     public TransactionObject createNewTransaction() {
+        // Initialized variables.
         Scanner scanner = new Scanner(System.in);
+        TransactionReaderDAO transactionReaderDAO = new TransactionReaderDAO();
+        int automatedId = transactionReaderDAO.getAutomatedTransactionId();
+        Date automatedDate = transactionReaderDAO.getAutomatedDate();
         // Automated transaction id.
-        int automatedId = getAutomatedId();
+        System.out.println("Automated id: " + automatedId);
         System.out.println(guiSupport.shortDashLine());
         // Select type.
         Type type = new TypeHandler().selectType();
         System.out.println(guiSupport.shortDashLine());
         // Input date.
-        Date date = getDate(scanner);
+        Date date = getDate(scanner, automatedDate);
         System.out.println(guiSupport.shortDashLine());
         // Get the amount.
         AmountObject amount = new AmountHandler().getAmountInputFromUser(type);
@@ -87,22 +91,16 @@ public class TransactionGenerator {
         return new NoteHandler(type, suggestedNoteInput).selectNote();
     }
 
-    private static Date getDate(Scanner scanner) {
+    private static Date getDate(Scanner scanner, Date automatedDate) {
         Date date = null;
-        System.out.print("Date yyyy-mm-dd (Leave it BLANK for today's date): ");
+        System.out.print("Date yyyy-mm-dd (automated): ");
         String dateString = scanner.nextLine();
         if (dateString == null || dateString.length() < 6) {
-            date = new Date();
+            date = automatedDate;
         } else if (dateString.length() <= 10) {
             date = new DateHandler(dateString).getDate();
         }
         System.out.println("Confirm date: " + new DateHandler(date));
         return date;
-    }
-
-    private int getAutomatedId() {
-        int automatedId = new TransactionReaderDAO().getAutomatedTransactionId();
-        System.out.println("Automated id: " + automatedId);
-        return automatedId;
     }
 }

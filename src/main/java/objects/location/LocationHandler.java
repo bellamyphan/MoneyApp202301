@@ -2,7 +2,6 @@ package objects.location;
 
 import dao.location.UsCitiesReaderDAO;
 import dao.location.UsStatesReaderDAO;
-import dao.transaction.TransactionReaderDAO;
 import objects.transaction.Transaction;
 import objects.transaction.TransactionObject;
 import objects.type.Type;
@@ -10,7 +9,11 @@ import objects.type.Type;
 import java.util.*;
 
 public class LocationHandler {
-    public LocationObject getLocation(Type type, String name) {
+
+    List<Transaction> transactions;
+
+    public LocationObject getLocation(List<Transaction> transactions, Type type, String name) {
+        this.transactions = transactions;
         // Select location based on history.
         LocationObject selectedLocation = guessLocationBasedHistory(type, name);
         if (selectedLocation != null)
@@ -37,7 +40,6 @@ public class LocationHandler {
 
     private LocationObject guessLocationBasedHistory(Type type, String name) {
         // Get a list of location objects based on most 300 transactions.
-        List<Transaction> transactions = new TransactionReaderDAO().getTransactions();
         List<LocationObject> suggestedLocations = new ArrayList<>();
         for (int i = Math.max(0, transactions.size() - 300); i < transactions.size(); i++) {
             Transaction transaction = transactions.get(i);

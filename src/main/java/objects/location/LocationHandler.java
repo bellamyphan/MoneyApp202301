@@ -17,7 +17,8 @@ public class LocationHandler {
     String userInput;
 
     public LocationHandler(List<Transaction> transactions, Type type, String name) {
-        this.transactions = transactions;
+        this.transactions = new ArrayList<>(transactions);
+        Collections.reverse(transactions);
         scanner = new Scanner(System.in);
         suggestedLocations = new ArrayList<>();
         // Get a list of location objects based on most 300 transactions.
@@ -32,7 +33,6 @@ public class LocationHandler {
                 }
             }
         }
-        Collections.reverse(suggestedLocations);
     }
 
     public LocationObject getLocation() {

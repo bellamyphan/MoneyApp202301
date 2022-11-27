@@ -16,7 +16,8 @@ public class NameSuggestBasedHistory {
     List<Transaction> transactions;
 
     public NameSuggestBasedHistory(List<Transaction> transactions, Type type, String note) {
-        this.transactions = transactions;
+        this.transactions = new ArrayList<>(transactions);
+        Collections.reverse(transactions);
         List<Transaction> typedNotedTransactions = new TransactionHandler(transactions)
                 .getFilteredTransactions(type, note);
         suggestedNames = new ArrayList<>();
@@ -27,7 +28,6 @@ public class NameSuggestBasedHistory {
                 }
             }
         }
-        Collections.reverse(suggestedNames);
     }
 
     public String selectName() {

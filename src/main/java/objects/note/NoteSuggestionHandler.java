@@ -5,10 +5,7 @@ import objects.transaction.TransactionHandler;
 import objects.type.Type;
 import tools.StringHandler;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class NoteSuggestionHandler {
     String suggestionInput;
@@ -17,7 +14,8 @@ public class NoteSuggestionHandler {
 
     public NoteSuggestionHandler(List<Transaction> transactions, Type type, String suggestionInput) {
         this.suggestionInput = suggestionInput;
-        this.transactions = transactions;
+        this.transactions = new ArrayList<>(transactions);
+        Collections.reverse(transactions);
         List<Transaction> typedTransactions = new TransactionHandler(transactions).getFilteredTransactions(type);
         suggestedNotes = new LinkedList<>();
         for (Transaction transaction : typedTransactions) {
@@ -27,7 +25,6 @@ public class NoteSuggestionHandler {
                 }
             }
         }
-        Collections.reverse(suggestedNotes);
     }
 
     public String selectNote() {

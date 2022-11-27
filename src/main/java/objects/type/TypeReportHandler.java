@@ -12,13 +12,14 @@ import tools.DateHandler;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.ListIterator;
 
 public class TypeReportHandler {
     public String getTypeReportFilterByTime(Date start, Date end) {
         // Initialize variables.
         StringBuilder result = new StringBuilder();
         AmountObject overallBalance = new AmountObject(new BigDecimal("0"));
-        // Get filtered transactions.
+        // Get filtered transactions by time.
         List<Transaction> allTransactions = new TransactionReaderDAO().getTransactions();
         List<Transaction> filteredTransactions;
         if (start != null) {
@@ -28,14 +29,16 @@ public class TypeReportHandler {
             filteredTransactions = new TransactionHandler(allTransactions)
                     .getFilteredTransactionsUntilDate(end);
         }
-
         // Summarize per type and keep track overall balance.
         for (Type type : Type.values()) {
             AmountObject balance = new AmountObject(new BigDecimal("0"));
-            for (Transaction transaction : filteredTransactions) {
+            ListIterator<Transaction> listIterator = filteredTransactions.listIterator();
+            while(listIterator.hasNext()) {
+                Transaction transaction = listIterator.next();
                 if (transaction instanceof TransactionObject) {
                     if (((TransactionObject) transaction).getType() == type) {
                         balance = balance.add(transaction.getAmount());
+                        listIterator.remove();
                     }
                 }
             }

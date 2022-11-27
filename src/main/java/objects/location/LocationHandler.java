@@ -7,10 +7,7 @@ import objects.transaction.Transaction;
 import objects.transaction.TransactionObject;
 import objects.type.Type;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class LocationHandler {
     public LocationObject getLocation(Type type, String name) {
@@ -47,7 +44,7 @@ public class LocationHandler {
             if (transaction instanceof TransactionObject) {
                 if (((TransactionObject) transaction).getType() == type &&
                         ((TransactionObject) transaction).getName().compareToIgnoreCase(name) == 0) {
-                    if (!doesLocationListContain(suggestedLocations, ((TransactionObject) transaction).getLocation())) {
+                    if (!suggestedLocations.contains(((TransactionObject) transaction).getLocation())) {
                         suggestedLocations.add(((TransactionObject) transaction).getLocation());
                     }
                 }
@@ -83,15 +80,5 @@ public class LocationHandler {
     private String getCity(String cityStateString) {
         String[] cells = cityStateString.split(", ");
         return cells[0];
-    }
-
-    private boolean doesLocationListContain(List<LocationObject> list, LocationObject location) {
-        for (LocationObject currentLocation : list) {
-            if (currentLocation.getCountry().compareToIgnoreCase(location.getCountry()) == 0
-                    && currentLocation.getState().compareToIgnoreCase(location.getState()) == 0
-                    && currentLocation.getCity().compareToIgnoreCase(location.getCity()) == 0)
-                return true;
-        }
-        return false;
     }
 }

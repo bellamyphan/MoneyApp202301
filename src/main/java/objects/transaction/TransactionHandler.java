@@ -46,12 +46,26 @@ public class TransactionHandler {
         return filteredTransactions;
     }
 
+    public List<Transaction> getFilteredTransactionsUntilDate(Date endDate) {
+        List<Transaction> filteredTransactions = new ArrayList<>();
+        for (Transaction transaction : transactions) {
+            if (endDate.compareTo(transaction.getDate()) >= 0) {
+                filteredTransactions.add(transaction);
+            }
+        }
+        return filteredTransactions;
+    }
+
     @Override
     public String toString() {
         StringBuilder finalString = new StringBuilder();
         for (Transaction transaction : transactions) {
             finalString.append(transaction.toString()).append("\n");
         }
-        return finalString.substring(0, finalString.length() - 1);
+        if (finalString.length() == 0) {
+            return "";
+        } else {
+            return finalString.substring(0, finalString.length() - 1);
+        }
     }
 }

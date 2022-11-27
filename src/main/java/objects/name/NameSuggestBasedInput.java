@@ -4,9 +4,7 @@ import objects.transaction.Transaction;
 import objects.transaction.TransactionObject;
 import tools.StringHandler;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class NameSuggestBasedInput {
     String suggestionInput;
@@ -14,7 +12,8 @@ public class NameSuggestBasedInput {
     List<Transaction> transactions;
 
     public NameSuggestBasedInput(List<Transaction> transactions, String suggestionInput) {
-        this.transactions = transactions;
+        this.transactions = new ArrayList<>(transactions);
+        Collections.reverse(transactions);
         this.suggestionInput = suggestionInput;
         suggestedNames = new LinkedList<>();
         for (Transaction transaction : transactions) {
@@ -35,13 +34,15 @@ public class NameSuggestBasedInput {
         String inputString;
         // Output suggested names.
         if (suggestedNames.size() > 0) {
-            System.out.println("Select or input a name (Company/Brand):");
             for (int i = 0; i < suggestedNames.size(); i++) {
                 System.out.println(i + ". " + suggestedNames.get(i));
             }
         }
         // Get input from user.
-        System.out.print("Choose a name or input new name(with suggestion): ");
+        if (suggestedNames.size() > 0)
+            System.out.print("Choose suggested name or enter new Name: ");
+        else
+            System.out.print("Enter new name: ");
         inputString = scanner.nextLine();
         // Convert to an integer if inputString is an integer.
         int option = -1;
@@ -50,6 +51,9 @@ public class NameSuggestBasedInput {
                 option = Integer.parseInt(inputString);
             }
         }
+        // Get quick selection.
+        if (inputString.length() == 0 && suggestedNames.size() > 0)
+            option = 0;
         // Get suggested name if we get a valid integer input.
         if (0 <= option && option < suggestedNames.size()) {
             finalName = suggestedNames.get(option);

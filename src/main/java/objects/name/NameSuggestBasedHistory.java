@@ -43,7 +43,11 @@ public class NameSuggestBasedHistory {
             }
         }
         // Get input from user.
-        System.out.print("Choose a name or input new name(with suggestion): ");
+        if (suggestedNames.size() > 0) {
+            System.out.print("Choose a name or enter simple name for suggestion: ");
+        } else {
+            System.out.print("Enter simple name for suggestion: ");
+        }
         inputString = scanner.nextLine();
         // Convert to an integer if inputString is an integer.
         int option = -1;
@@ -62,7 +66,6 @@ public class NameSuggestBasedHistory {
         }
         // Get the new name not in the suggested list.
         else {
-            System.out.println("Suggestion for names based on '" + inputString + "':");
             finalName = new NameSuggestBasedInput(transactions, inputString).selectName();
         }
         // Return statement.

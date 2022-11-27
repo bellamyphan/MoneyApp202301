@@ -49,6 +49,11 @@ public class LocationHandler {
 
     private LocationObject getLocationBasedUserInput() {
         UsStatesReaderDAO usStatesReaderDAO = new UsStatesReaderDAO();
+        // Get location input from user
+        if (userInput == null || userInput.length() == 0) {
+            System.out.print("Enter city, stateCode: ");
+            userInput = scanner.nextLine();
+        }
         String cityName = getCity(userInput);
         String stateCode = getStateCode(userInput);
         boolean isValidStateCode = usStatesReaderDAO.isValidStateCode(stateCode);

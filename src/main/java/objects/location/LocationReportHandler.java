@@ -1,6 +1,5 @@
 package objects.location;
 
-import dao.transaction.TransactionReaderDAO;
 import objects.amount.AmountObject;
 import objects.transaction.Transaction;
 import objects.transaction.TransactionHandler;
@@ -13,18 +12,24 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class LocationReportHandler {
+
+    List<Transaction> transactions;
+
+    public LocationReportHandler(List<Transaction> transactions) {
+        this.transactions = new ArrayList<>(transactions);
+    }
+
     public String getLocationReportFilterByTime(Date start, Date end) {
         // Initialize variables.
         StringBuilder result = new StringBuilder();
         AmountObject overallBalance = new AmountObject(new BigDecimal("0"));
         // Get filtered transactions by time.
-        List<Transaction> allTransactions = new TransactionReaderDAO().getTransactions();
         List<Transaction> filteredTransactions;
         if (start != null) {
-            filteredTransactions = new TransactionHandler(allTransactions)
+            filteredTransactions = new TransactionHandler(transactions)
                     .getFilteredTransactions(start, end);
         } else {
-            filteredTransactions = new TransactionHandler(allTransactions)
+            filteredTransactions = new TransactionHandler(transactions)
                     .getFilteredTransactionsUntilDate(end);
         }
         // Get a list of locations from filtered transactions.
@@ -66,13 +71,12 @@ public class LocationReportHandler {
         StringBuilder finalStringReport = new StringBuilder();
         AmountObject overallBalance = new AmountObject(new BigDecimal("0"));
         // Get filtered transactions by time.
-        List<Transaction> allTransactions = new TransactionReaderDAO().getTransactions();
         List<Transaction> filteredTransactions;
         if (start != null) {
-            filteredTransactions = new TransactionHandler(allTransactions)
+            filteredTransactions = new TransactionHandler(transactions)
                     .getFilteredTransactions(start, end);
         } else {
-            filteredTransactions = new TransactionHandler(allTransactions)
+            filteredTransactions = new TransactionHandler(transactions)
                     .getFilteredTransactionsUntilDate(end);
         }
         // Get a list of locations from filtered transactions.

@@ -1,5 +1,6 @@
 package gui;
 
+import dao.transaction.TransactionReaderDAO;
 import gui.report.ReportMenu;
 import gui.transaction.TransactionMenu;
 
@@ -22,7 +23,11 @@ public class MainMenu extends BasicMenu {
             case 0 -> System.out.println("Exit Main Menu...");
             case 1 -> new TransactionMenu().run();
             case 2 -> new BankMenu().run();
-            case 3 -> new ReportMenu().run();
+            case 3 -> {
+                System.out.println("Loading all transactions...");
+                System.out.println(guiSupport.shortDashLine());
+                new ReportMenu(new TransactionReaderDAO().getTransactions()).run();
+            }
             case 4 -> new ExportMenu().run();
             case 5 -> new InvestmentAndSavingMenu().run();
             case 6 -> new NetWorthMenu().run();

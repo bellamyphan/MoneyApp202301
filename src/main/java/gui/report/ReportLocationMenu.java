@@ -2,8 +2,18 @@ package gui.report;
 
 import gui.BasicMenu;
 import objects.location.LocationReportHandler;
+import objects.transaction.Transaction;
+
+import java.util.List;
 
 public class ReportLocationMenu extends BasicMenu {
+
+    List<Transaction> transactions;
+
+    public ReportLocationMenu(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
     @Override
     public void showMenu() {
         System.out.println("Location Report Menu");
@@ -25,8 +35,8 @@ public class ReportLocationMenu extends BasicMenu {
         System.out.println(guiSupport.shortDashLine());
         switch (option) {
             case 0 -> System.out.println("Exit Location Report Menu...");
-            case 9 -> System.out.println(new LocationReportHandler().getLocationReportFilterUntilToday());
-            case 10 -> System.out.println(new LocationReportHandler().getLocationPerNameReportFilterUntilToday());
+            case 9 -> System.out.println(new LocationReportHandler(transactions).getLocationReportFilterUntilToday());
+            case 10 -> System.out.println(new LocationReportHandler(transactions).getLocationPerNameReportFilterUntilToday());
             default -> System.out.println("This feature is not IMPLEMENTED or INVALID input");
         }
         if (option != 0)

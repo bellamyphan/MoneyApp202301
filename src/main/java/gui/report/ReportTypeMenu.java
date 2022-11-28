@@ -1,9 +1,19 @@
 package gui.report;
 
 import gui.BasicMenu;
+import objects.transaction.Transaction;
 import objects.type.TypeReportHandler;
 
+import java.util.List;
+
 public class ReportTypeMenu extends BasicMenu {
+
+    List<Transaction> transactions;
+
+    public ReportTypeMenu(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
     @Override
     public void showMenu() {
         System.out.println("Type Report Menu");
@@ -27,7 +37,7 @@ public class ReportTypeMenu extends BasicMenu {
             case 0 -> System.out.println("Exit Type Report Menu...");
             case 3 -> typeReportForInputMonth();
             case 4 -> typeReportForInputYear();
-            case 9 -> System.out.println(new TypeReportHandler().getTypeReportFilterUntilToday());
+            case 9 -> System.out.println(new TypeReportHandler(transactions).getTypeReportFilterUntilToday());
             default -> System.out.println("This feature is not IMPLEMENTED or INVALID input");
         }
         if (option != 0)
@@ -37,12 +47,12 @@ public class ReportTypeMenu extends BasicMenu {
     private void typeReportForInputMonth() {
         System.out.print("Enter YyyyMm: ");
         String yearMonthString = scanner.nextLine();
-        System.out.println(new TypeReportHandler().getTypeReportFilterByMonth(yearMonthString));
+        System.out.println(new TypeReportHandler(transactions).getTypeReportFilterByMonth(yearMonthString));
     }
 
     private void typeReportForInputYear() {
         System.out.print("Enter yyyy: ");
         String yearString = scanner.nextLine();
-        System.out.println(new TypeReportHandler().getTypeReportFilterByYear(yearString));
+        System.out.println(new TypeReportHandler(transactions).getTypeReportFilterByYear(yearString));
     }
 }

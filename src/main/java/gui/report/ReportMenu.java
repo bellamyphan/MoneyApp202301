@@ -1,8 +1,17 @@
 package gui.report;
 
 import gui.BasicMenu;
+import objects.transaction.Transaction;
+
+import java.util.List;
 
 public class ReportMenu extends BasicMenu {
+
+    List<Transaction> transactions;
+
+    public ReportMenu(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
 
     @Override
     public void showMenu() {
@@ -18,9 +27,9 @@ public class ReportMenu extends BasicMenu {
         System.out.println(guiSupport.shortDashLine());
         switch (option) {
             case 0 -> System.out.println("Exit Report Menu...");
-            case 1 -> new ReportTypeMenu().run();
+            case 1 -> new ReportTypeMenu(transactions).run();
             case 2 -> new ReportNameMenu().run();
-            case 3 -> new ReportLocationMenu().run();
+            case 3 -> new ReportLocationMenu(transactions).run();
             case 4 -> new ReportBudgetMenu().run();
             default -> System.out.println("This feature is not IMPLEMENTED or INVALID input");
         }

@@ -1,24 +1,22 @@
 package objects.note;
 
 import objects.transaction.Transaction;
-import dao.transaction.TransactionReaderDAO;
 import objects.transaction.TransactionHandler;
 import objects.type.Type;
 import tools.StringHandler;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
-public class NoteHandler {
+public class NoteSuggestionHandler {
     String suggestionInput;
     List<String> suggestedNotes;
+    List<Transaction> transactions;
 
-    public NoteHandler(Type type, String suggestionInput) {
+    public NoteSuggestionHandler(List<Transaction> transactions, Type type, String suggestionInput) {
         this.suggestionInput = suggestionInput;
-        List<Transaction> typedTransactions = new TransactionHandler(new TransactionReaderDAO().getTransactions())
-                .getFilteredTransactions(type);
+        this.transactions = new ArrayList<>(transactions);
+        Collections.reverse(transactions);
+        List<Transaction> typedTransactions = new TransactionHandler(transactions).getFilteredTransactions(type);
         suggestedNotes = new LinkedList<>();
         for (Transaction transaction : typedTransactions) {
             if (transaction.getNote().toLowerCase().contains(suggestionInput.toLowerCase())) {
@@ -27,7 +25,6 @@ public class NoteHandler {
                 }
             }
         }
-        Collections.reverse(suggestedNotes);
     }
 
     public String selectNote() {
@@ -51,6 +48,10 @@ public class NoteHandler {
             if (new StringHandler(inputString).isAllNumberDigit()) {
                 option = Integer.parseInt(inputString);
             }
+        }
+        // Get quick selection if inputString is empty.
+        if (inputString.length() == 0 && suggestedNotes.size() > 0) {
+            option = 0;
         }
         // Get suggested notes if we get a valid integer input.
         if (0 <= option && option < suggestedNotes.size()) {

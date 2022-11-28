@@ -1,10 +1,10 @@
 package objects.name;
 
 import objects.transaction.Transaction;
-import dao.transaction.TransactionReaderDAO;
 import objects.transaction.TransactionHandler;
 import objects.transaction.TransactionObject;
 import objects.type.Type;
+import tools.StringHandler;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,9 +13,12 @@ import java.util.Scanner;
 
 public class NameSuggestBasedHistory {
     List<String> suggestedNames;
+    List<Transaction> transactions;
 
-    public NameSuggestBasedHistory(Type type, String note) {
-        List<Transaction> typedNotedTransactions = new TransactionHandler(new TransactionReaderDAO().getTransactions())
+    public NameSuggestBasedHistory(List<Transaction> transactions, Type type, String note) {
+        this.transactions = new ArrayList<>(transactions);
+        Collections.reverse(transactions);
+        List<Transaction> typedNotedTransactions = new TransactionHandler(transactions)
                 .getFilteredTransactions(type, note);
         suggestedNames = new ArrayList<>();
         for (Transaction transaction : typedNotedTransactions) {
@@ -25,38 +28,48 @@ public class NameSuggestBasedHistory {
                 }
             }
         }
-        Collections.reverse(suggestedNames);
     }
 
     public String selectName() {
         // Initialize variables.
         String finalName;
         Scanner scanner = new Scanner(System.in);
-        int option = 0;
+        String inputString;
         // Output suggested names.
         if (suggestedNames.size() > 0) {
-            System.out.println("Select a name (Company/Brand):");
-            int i;
-            for (i = 0; i < suggestedNames.size(); i++) {
+            System.out.println("Select or input a name (Company/Brand):");
+            for (int i = 0; i < suggestedNames.size(); i++) {
                 System.out.println(i + ". " + suggestedNames.get(i));
             }
-            System.out.println(i + ". ENTER YOUR NEW NAME (Company/Brand)");
-            System.out.print("Your selection: ");
-            option = scanner.nextInt();
-            scanner.nextLine();
         }
-        // Get the suggested name.
-        if (option < suggestedNames.size()) {
+        // Get input from user.
+        if (suggestedNames.size() > 0) {
+            System.out.print("Choose a name or enter simple name for suggestion: ");
+        } else {
+            System.out.print("Enter simple name for suggestion: ");
+        }
+        inputString = scanner.nextLine();
+        // Convert to an integer if inputString is an integer.
+        int option = -1;
+        if (inputString.length() > 0) {
+            if (new StringHandler(inputString).isAllNumberDigit()) {
+                option = Integer.parseInt(inputString);
+            }
+        }
+        // Get quick name selection from user.
+        if (inputString.length() == 0 && suggestedNames.size() > 0) {
+            option = 0;
+        }
+        // Get suggested name if we get a valid integer input.
+        if (0 <= option && option < suggestedNames.size()) {
             finalName = suggestedNames.get(option);
-            System.out.println("Confirm name (Company/Brand): " + finalName);
         }
         // Get the new name not in the suggested list.
         else {
-            System.out.print("Enter any name (Company/Brand) for suggestion: ");
-            String suggestedInput = scanner.nextLine();
-            finalName = new NameSuggestBasedInput(suggestedInput).selectName();
+            finalName = new NameSuggestBasedInput(transactions, inputString).selectName();
         }
         // Return statement.
+        System.out.println("Confirm name (Company/Brand): " + finalName);
         return finalName;
     }
 }

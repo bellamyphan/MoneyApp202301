@@ -1,12 +1,23 @@
 package dao.bank;
 
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import dao.path.DataPath;
+import objects.amount.AmountObject;
 import objects.bank.BankObject;
 import objects.bank.BankType;
+import objects.location.LocationObject;
+import objects.transaction.TransactionObject;
+import objects.transaction.TransactionType;
+import objects.type.Type;
 import tools.DateHandler;
+import tools.DoubleQuoteHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,20 +30,18 @@ public class BankReaderDAO {
         // Create empty banks list.
         banks = new ArrayList<>();
         // Read the csv data file.
-        try (Scanner scanner = new Scanner(new File(DataPath.banksDataPath))) {
-            // Skip header line.
-            scanner.nextLine();
-            // Read each line.
-            while (scanner.hasNext()) {
-                String currentLine = scanner.nextLine();
-                String[] cells = currentLine.split(",");
-                String name = cells[0];
-                Date openDate = new DateHandler(cells[1]).getDate();
-                Date closeDate = new DateHandler(cells[2]).getDate();
-                BankType type = BankType.valueOf(cells[3].toUpperCase());
-                banks.add(new BankObject(name, openDate, closeDate, type));
+        try (FileReader fileReader = new FileReader(DataPath.banksDataPath);
+             CSVReader csvReader = new CSVReader(fileReader)) {
+            String[] bankLine;
+            boolean skipHeaderLine = true;
+            while ((bankLine = csvReader.readNext()) != null) {
+                if (skipHeaderLine) {
+                    skipHeaderLine = false;
+                    continue;
+                }
+                banks.add(getBankFromBankLine(bankLine));
             }
-        } catch (FileNotFoundException e) {
+        } catch (IOException | CsvValidationException e) {
             throw new RuntimeException(e);
         }
     }
@@ -58,5 +67,18 @@ public class BankReaderDAO {
             }
         }
         return null;
+    }
+
+    private BankObject getBankFromBankLine(String[] bankLine) {
+        String name = DoubleQuoteHandler.removeDoubleQuote(bankLine[0]);
+        Date openDate = new DateHandler(DoubleQuoteHandler.removeDoubleQuote(bankLine[1])).getDate();
+        // In case close date is null (active bank).
+        String closeDateString = DoubleQuoteHandler.removeDoubleQuote(bankLine[2]);
+        Date closeDate = null;
+        if (closeDateString.length() != 0) {
+            closeDate = new DateHandler(closeDateString).getDate();
+        }
+        BankType type = BankType.valueOf(DoubleQuoteHandler.removeDoubleQuote(bankLine[3]));
+        return new BankObject(name, openDate, closeDate, type);
     }
 }

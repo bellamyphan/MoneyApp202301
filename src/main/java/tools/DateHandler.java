@@ -40,6 +40,18 @@ public class DateHandler {
         return date;
     }
 
+    public int getMonth() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.MONTH) + 1;
+    }
+
+    public int getYear() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.YEAR);
+    }
+
     public Date getFirstDayOfThisMonth() {
         String newDateString = getSimpleDateString().substring(0, 7);
         return new DateHandler(newDateString).getDate();

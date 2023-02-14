@@ -28,10 +28,8 @@ public class TransactionReaderDAO {
         // Read the csv data file.
         try (FileReader fileReader = new FileReader(DataPath.transactionsDataPath);
              CSVReader csvReader = new CSVReader(fileReader)) {
-
             String[] transactionLine;
             boolean skipHeaderLine = true;
-
             while ((transactionLine = csvReader.readNext()) != null) {
                 if (skipHeaderLine) {
                     skipHeaderLine = false;

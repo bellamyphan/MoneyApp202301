@@ -97,7 +97,16 @@ public class TransactionGenerator {
         Date date = null;
         System.out.print("Date yyyy-mm-dd (automated): ");
         String dateString = scanner.nextLine();
-        if (dateString == null || dateString.length() < 6) {
+        if (dateString.length() == 2) {
+            DateHandler dateHandler = new DateHandler(automatedDate);
+            String year = String.valueOf(dateHandler.getYear());
+            String month = String.valueOf(dateHandler.getMonth());
+            if (month.length() == 1) {
+                month = "0" + month;
+            }
+            String day = dateString;
+            date = new DateHandler(year + "-" + month + "-" + day).getDate();
+        } else if (dateString == null || dateString.length() < 6) {
             date = automatedDate;
         } else if (dateString.length() <= 10) {
             date = new DateHandler(dateString).getDate();

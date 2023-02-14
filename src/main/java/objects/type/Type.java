@@ -26,5 +26,6 @@ public enum Type {
     ENTERTAINMENT,
     SHOP,
     CLOTHES,
-    CHARITY
+    CHARITY,
+    CURVE
 }
